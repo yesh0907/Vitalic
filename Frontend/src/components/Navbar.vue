@@ -3,17 +3,10 @@
     <el-row>
       <el-col :span="6" :offset="4"><router-link to="/"><img id="logo" src="../assets/v_logo_v.png"/></router-link></el-col>
       <el-col class="menu" :span="6" :offset="5" style="">
-<<<<<<< HEAD
-        <el-menu default-active="/" mode="horizontal" @select="handleSelect" style="float: left">
-          <el-menu-item id="home" index="/">Home</el-menu-item>
-          <el-menu-item id="about" index="/About">About</el-menu-item>
-          <el-menu-item id="dashboard" index="/Dashboard">Dashboard</el-menu-item>
-=======
-        <el-menu default-active="1" class="el-menu-demo" mode="horizontal" @select="handleSelect" style="float: left">
-          <el-menu-item index="1"><router-link to="/" class="route">Home</router-link></el-menu-item>
-          <el-menu-item index="2"><router-link to="About" class="route">About</router-link></el-menu-item>
-          <el-menu-item index="3"><router-link to="Desktop" class="route">Dashboard</router-link></el-menu-item>
->>>>>>> origin/master
+        <el-menu class="el-menu-demo" mode="horizontal" style="float: left" router="true">
+          <el-menu-item index="/">Home</el-menu-item>
+          <el-menu-item index="/About">About</el-menu-item>
+          <el-menu-item index="/Desktop">Dashboard</el-menu-item>
         </el-menu>
       </el-col>
     </el-row>
