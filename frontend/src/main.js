@@ -14,6 +14,11 @@ import VueRouter from 'vue-router'
 // store
 import store from './store'
 
+// views
+import Login from './views/Login.vue'
+import Dashboard from './views/Dashboard.vue'
+import Detail from './views/Detail.vue'
+
 Vue.use(Element, {locale})
 Vue.use(VueRouter)
 
@@ -21,6 +26,9 @@ const router = new VueRouter({
   mode: 'history',
   base: __dirname,
   routes: [
+    { path: '/Login', component: Login },
+    { path: '/Dashboard', component: Dashboard },
+    { path: '/Detail:id', component: Detail }
   ]
 })
 
