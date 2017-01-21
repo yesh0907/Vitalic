@@ -6,18 +6,15 @@
     </el-row>
     <br>
     <homeTabs></homeTabs>
-    <dashboard></dashboard>
   </div>
 </template>
 
 <script>
   import homeTabs from '../components/homeTabs'
-  import dashboard from './dashboard'
   export default {
     name: 'home',
     components: {
-      homeTabs,
-      dashboard
+      homeTabs
     },
     data () {
       return {
