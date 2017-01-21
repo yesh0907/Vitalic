@@ -2,16 +2,16 @@
   <div id="details">
     <el-row :gutter="20">
       <el-col :span="6">
-        <detailCard infoType="Heart Rate" infoForStore="heartRate"></detailCard>
+        <detailCard infoType="Heart Rate"></detailCard>
       </el-col>
       <el-col :span="6">
-        <detailCard infoType="Stress Level" infoForStore="stressLevel"></detailCard>
+        <detailCard infoType="Stress Level"></detailCard>
       </el-col>
       <el-col :span="6">
-        <detailCard infoType="Breathing Rate" infoForStore="breathingRate"></detailCard>
+        <detailCard infoType="Breathing Rate"></detailCard>
       </el-col>
       <el-col :span="6">
-        <detailCard infoType="Blood Pressure" infoForStore="bloodPressure"></detailCard>
+        <detailCard infoType="Blood Pressure"></detailCard>
       </el-col>
     </el-row>
   </div>
