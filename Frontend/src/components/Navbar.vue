@@ -6,7 +6,7 @@
         <el-menu default-active="1" class="el-menu-demo" mode="horizontal" @select="handleSelect" style="float: left">
           <el-menu-item index="1"><router-link to="/" class="route">Home</router-link></el-menu-item>
           <el-menu-item index="2"><router-link to="About" class="route">About</router-link></el-menu-item>
-          <el-menu-item index="3"><router-link to="Dashboard" class="route">Dashboard</router-link></el-menu-item>
+          <el-menu-item index="3"><router-link to="Desktop" class="route">Dashboard</router-link></el-menu-item>
         </el-menu>
       </el-col>
     </el-row>
