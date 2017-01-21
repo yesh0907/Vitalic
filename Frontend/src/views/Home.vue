@@ -6,15 +6,19 @@
     </el-row>
     <br>
     <homeTabs></homeTabs>
+    <br>
+    <Details></Details>
   </div>
 </template>
 
 <script>
   import homeTabs from '../components/homeTabs'
+  import Details from './Detail'
   export default {
     name: 'home',
     components: {
-      homeTabs
+      homeTabs,
+      Details
     },
     data () {
       return {
