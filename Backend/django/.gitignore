@@ -1,3 +1,8 @@
+venv
+*.pyc
+staticfiles
+.env
+
 
 # Created by https://www.gitignore.io/api/django,macos,python
 
