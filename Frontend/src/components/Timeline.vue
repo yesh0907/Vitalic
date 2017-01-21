@@ -24,7 +24,7 @@ export default {
   },
   data () {
     return {
-      height: 50
+      height: 60
     }
   },
   props: ['moveTo']
@@ -35,7 +35,7 @@ export default {
 .line {
   width: 5px;
   background-color: #ffffff;
-
+  position: fixed;
   border-radius: 25px;
 
 }
@@ -48,7 +48,6 @@ export default {
 
 .dot {
   display: flex;
-  position: absolute;
   justify-content: center;
   align-items: center;
   color:#e74c3c;
@@ -56,5 +55,6 @@ export default {
   width: 30px;
   border-radius: 25px;
   background-color: #ffffff;
+  position: fixed;
 }
 </style>
