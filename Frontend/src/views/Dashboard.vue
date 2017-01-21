@@ -3,10 +3,9 @@
 <div class="container">
   <el-row type="flex">
     <el-col :span="4">
-      <Timeline :move-to="moveTo" id="timelinePadding"></Timeline>
+      <Timeline :move-to="moveTo"></Timeline>
     </el-col>
     <el-col :span="20" style="overflow: hidden;">
-      <div id="uploadPadding"><el-row><uploadBox></uploadBox></el-row></div>
       <div v-for="(each, id) in $store.state.records" >
         <Item :data="each" :ref="id"></Item>
         <br>
@@ -21,7 +20,6 @@
 <script>
 import Item from '../components/Item'
 import Timeline from '../components/Timeline'
-import uploadBox from '../components/uploadBox'
 
 import $ from 'jquery'
 
@@ -29,8 +27,7 @@ export default {
   name: 'dashboard',
   components: {
     Item,
-    Timeline,
-    uploadBox
+    Timeline
   },
   data () {
     return {
@@ -43,11 +40,6 @@ export default {
       $('html, body').animate({
         scrollTop: this.$refs[id][0].$el.offsetTop
       }, 1000)
-    },
-    changeCSS () {
-      $(document).scroll(function () {
-        $('#timelinePadding').css({'padding-top': $(this).scrollTop() > 125 ? '0px' : '125px'})
-      })
     }
   },
   mounted () {
@@ -59,18 +51,10 @@ export default {
         stressLevel: 'low',
         bloodPressure: 12
       })
-    };
-    window.addEventListener('scroll', this.changeCSS)
+    }
   }
 }
 </script>
 
 <style>
-#uploadPadding {
-  padding: 50px
-}
-
-#timelinePadding {
-  padding-top: 125px
-}
 </style>

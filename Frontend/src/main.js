@@ -20,7 +20,9 @@ import Dashboard from './views/Dashboard.vue'
 import Detail from './views/Detail.vue'
 import Home from './views/Home.vue'
 import Live from './views/Live.vue'
+import Desktop from './views/Desktop.vue'
 import About from './views/About.vue'
+
 
 Vue.use(Element, {locale})
 Vue.use(VueRouter)
@@ -33,8 +35,10 @@ const router = new VueRouter({
     { path: '/Dashboard', component: Dashboard },
     { path: '/Detail:id', component: Detail },
     { path: '/', component: Home },
-    { path: '/About', component: About },
-    { path: '/Live', component: Live }
+    { path: '/Live', component: Live },
+    { path: '/Desktop', component: Desktop },
+    { path: '/About', component: About }
+
   ]
 })
 
