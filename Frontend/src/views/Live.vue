@@ -14,9 +14,6 @@
         <h2 class="heartrate">{{(Math.floor(time/60) < 10 ? '0'+Math.floor(time/60) : (Math.floor(time/60)))+':'+(time%60 < 10 ? '0'+time%60 : time%60)}}</h2>
       </el-col>
     </el-row>
-
-
-
   </div>
 </div>
 
@@ -26,8 +23,10 @@
 import { Loading } from 'element-ui'
 import headtrackr from '../util/headtrackr.js'
 import mathmatical from '../util/mathmatical.js'
+import utilities from '../util/utilities.js'
 
 // import $ from 'jquery'
+// import _ from 'underscore'
 
 // const mean = mathmatical.mean
 const frequencyExtract = mathmatical.frequencyExtract
@@ -43,8 +42,8 @@ let sendingData = false
 let red = []
 let green = []
 let blue = []
-let heartrateAverage = []
-// let hrAvg = 65
+let allHeartRates = []
+let hr = 0
 
 function initVideoStream () {
   video = document.createElement('video')
@@ -103,17 +102,6 @@ function greenRect (event) {
     forehead = context.getImageData(sx, sy, sw, sh)
 
     for (let i = 0; i < forehead.data.length; i += 4) {
-        // ** for reference: **
-        // var red = forehead.data[i];
-        // var green = forehead.data[i+1];
-        // var blue = forehead.data[i+2];
-        // var alpha = forehead.data[i+3];
-
-        //  ** for debugging: puts a green video image on screen **
-        // forehead.data[i] = 0;
-        // forehead.data[i + 1] = forehead.data[i]
-        // forehead.data[i + 2] = 0;
-
       redSum += forehead.data[i]
       greenSum += forehead.data[i + 1]
       blueSum += forehead.data[i + 2]
@@ -150,15 +138,53 @@ function cardiac (array, bfWindow) {
   let freq = freqs.freqInHertz
   heartrate = freq * 60
 
-  if (heartrateAverage.length < 3) {
-    heartrateAverage.push(heartrate)
-    // hrAvg = heartrate
-  } else {
-    heartrateAverage.push(heartrate)
-    heartrateAverage.shift()
-    // hrAvg = mean(heartrateAverage)
+  allHeartRates.push(heartrate)
+}
+
+function parseData () {
+  // Recrod Object
+  let record = {}
+
+  // Heart Rate
+  let rates = {}
+  allHeartRates = mathmatical.filterOutliers(allHeartRates)
+  for (let i = 0; i < allHeartRates.length; i++) {
+    let val = Math.round(allHeartRates[i])
+    if (!rates[val]) rates[val] = 0
+    rates[val]++
   }
-  // $('.heartrate').text('Heartrate: ' + Math.round(hrAvg))
+  hr = 0
+  let count = 0
+  for (let val in rates) {
+    hr += parseInt(val)
+    count++
+  }
+  hr = Math.round(hr / count)
+  console.log(hr)
+  record['heartRate'] = {}
+  record['heartRate']['value'] = hr
+  record['heartRate']['health'] = utilities.isHRHealthy(hr, 16)
+
+  // Blood Pressure
+  record['bloodPressure'] = utilities.calculateBP(hr, 'MALE', 16)
+  record['bloodPressure']['health'] = utilities.isBPHealthy(record['bloodPressure'])
+
+  // Cholesterol
+  record['cholesterol'] = utilities.checkChol(record['bloodPressure']['health'], record['heartRate']['health'])
+
+  // Stress
+  record['stress'] = utilities.checkStress(record['bloodPressure']['health'])
+
+  // Breathing Rate
+  record['breathingRate'] = utilities.calculateBreathingRate(16)
+
+  // Fever
+  record['fever'] = utilities.checkFever(record['bloodPressure']['diastolicPressure'], 16, 'MALE', hr)
+
+  // Mood
+  record['mood'] = utilities.checkMood(record['bloodPressure']['diastolicPressure'], 16, 'MALE', hr)
+
+  console.log(record)
 }
 
 function initWebSocket () {
@@ -233,6 +259,7 @@ export default {
       if (htracker.status !== 'stopped') {
         htracker.stop()
         video.pause()
+        parseData()
         clearInterval(this.countdown)
         this.time = 0
         Loading.service({
