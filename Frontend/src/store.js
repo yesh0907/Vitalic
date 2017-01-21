@@ -7,15 +7,6 @@ Vue.use(Vuex)
 // each Vuex instance is just a single state tree.
 const state = {
   records: {
-    'a42936c9458ddf1451f91a5831ab670c': {
-      'date': 'Sat Jan 21 2017 19:12:24 GMT+0800 (SGT)',
-      'heartrate': 90,
-      'mood': 'happy',
-      'stressLevel': 'low',
-      'breathingRate': 12,
-      'bloodPressure': 12,
-      'count': 1
-    }
   },
   screenWidth: 0,
   screenHeight: 0
@@ -39,12 +30,14 @@ const mutations = {
     }
 
     let obj = {
-      date: '',
-      heartrate: 0,
+      date: new Date().toString(),
+      stress: '',
+      heartRate: {},
+      cholesterol: '',
       mood: '',
-      bloodPressure: 0,
-      stressLevel: '',
+      bloodPressure: {},
       breathingRate: 0,
+      fever: '',
       count: Object.keys(state.records).length + 1
     }
     obj = Object.assign(obj, update)
