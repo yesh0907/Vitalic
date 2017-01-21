@@ -1,7 +1,6 @@
 <template>
   <div id="loginInput">
     <loginInput></loginInput>
-    <uploadBox></uploadBox>
   </div>
 </template>
 

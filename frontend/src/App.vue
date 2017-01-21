@@ -1,35 +1,30 @@
 <template>
   <div id="app">
     <router-view></router-view>
-    <login><login>
   </div>
 </template>
 
 <script>
-<<<<<<< HEAD
   import login from './views/Login'
+
   export default {
     name: 'app',
     components: {
       login
+    },
+    created () {
+      window.addEventListener('resize', this.handleResize)
+    },
+    beforeDestroy () {
+      window.removeEventListener('resize', this.handleResize)
+    },
+    methods: {
+      handleResize () {
+        this.$store.commit('resize', { size: window.innerWidth })
+      }
     }
   }
-=======
-export default {
-  created () {
-    window.addEventListener('resize', this.handleResize)
-  },
-  beforeDestroy () {
-    window.removeEventListener('resize', this.handleResize)
-  },
-  methods: {
-    handleResize () {
-      this.$store.commit('resize', { size: window.innerWidth })
-    }
-  }
-}
 
->>>>>>> master
 </script>
 
 <style>
