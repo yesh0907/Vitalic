@@ -6,8 +6,8 @@
       <Timeline></Timeline>
     </el-col>
     <el-col :span="20">
-      <div v-for="each in $store.state.records">
-        <Item :data="each"></Item>
+      <div v-for="(each, id) in $store.state.records">
+        <Item :data="each" :id="id"></Item>
         <br>
       </div>
     </el-col>
@@ -32,12 +32,14 @@ export default {
     }
   },
   mounted () {
-    this.$store.commit('newRecord', {
-      date: new Date(),
-      heartrate: 90,
-      mood: 'happy',
-      bloodPressure: 12
-    })
+    for (let i = 0; i < 10; i++) {
+      this.$store.commit('newRecord', {
+        date: new Date().toString(),
+        heartrate: 90,
+        mood: 'happy',
+        bloodPressure: 12
+      })
+    }
   }
 }
 </script>
