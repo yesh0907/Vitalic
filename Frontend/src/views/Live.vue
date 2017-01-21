@@ -23,6 +23,7 @@
 </template>
 
 <script>
+import { Loading } from 'element-ui'
 import headtrackr from '../util/headtrackr.js'
 import mathmatical from '../util/mathmatical.js'
 
@@ -234,6 +235,11 @@ export default {
         video.pause()
         clearInterval(this.countdown)
         this.time = 0
+        Loading.service({
+          fullscreen: true,
+          lock: true,
+          customClass: 'loading'
+        })
       } else {
         htracker.start()
         video.play()
@@ -291,4 +297,90 @@ width: 100%;
 }
 
 
+</style>
+
+
+<style>
+.loading>.el-loading-spinner>* {
+  display: none;
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+
+.loading>.el-loading-spinner {
+    content: '';
+    position: relative;
+    width: 100px;
+    height: 90px;
+    transition: 2s all;
+    animation: heartscale 1s infinite;
+    margin: auto;
+    top: 42%;
+}
+.loading>.el-loading-spinner:before,
+.loading>.el-loading-spinner:after {
+    position: absolute;
+    content: "";
+    left: 50px;
+    top: 0;
+    width: 50px;
+    height: 80px;
+    background: #e74c3c;
+    -moz-border-radius: 50px 50px 0 0;
+    border-radius: 50px 50px 0 0;
+    -webkit-transform: rotate(-45deg);
+       -moz-transform: rotate(-45deg);
+        -ms-transform: rotate(-45deg);
+         -o-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+    -webkit-transform-origin: 0 100%;
+       -moz-transform-origin: 0 100%;
+        -ms-transform-origin: 0 100%;
+         -o-transform-origin: 0 100%;
+            transform-origin: 0 100%;
+}
+.loading>.el-loading-spinner:after {
+    left: 0;
+    -webkit-transform: rotate(45deg);
+       -moz-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+         -o-transform: rotate(45deg);
+            transform: rotate(45deg);
+    -webkit-transform-origin: 100% 100%;
+       -moz-transform-origin: 100% 100%;
+        -ms-transform-origin: 100% 100%;
+         -o-transform-origin: 100% 100%;
+            transform-origin :100% 100%;
+}
+
+.loading:after {
+  content: "Processing video";
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: auto;
+  margin-top: 0%;
+  
+}
+
+/* .heart.pulse {
+  animation: heartscale 1s infinite;
+} */
+@keyframes heartscale {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  90% {
+    transform: scale(0.97);
+  }
+}
 </style>
