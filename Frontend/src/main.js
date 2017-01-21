@@ -23,8 +23,12 @@ import Live from './views/Live.vue'
 import Desktop from './views/Desktop.vue'
 import About from './views/About.vue'
 
+// plugins
+import Load from './plugins/Load/Load'
+
 Vue.use(Element, {locale})
 Vue.use(VueRouter)
+Vue.use(Load)
 
 const router = new VueRouter({
   mode: 'history',
@@ -38,6 +42,16 @@ const router = new VueRouter({
     { path: '/Desktop', component: Desktop },
     { path: '/About', component: About }
   ]
+})
+
+router.beforeEach(function (to, from, next) {
+  window.scrollTo(0, 0)
+  Vue.load.start({}, next.bind(this))
+  // next()
+})
+
+router.afterEach(function (to, from) {
+  Vue.load.finish({})
 })
 
 /* eslint-disable no-new */
