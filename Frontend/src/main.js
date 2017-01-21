@@ -23,7 +23,6 @@ import Live from './views/Live.vue'
 import Desktop from './views/Desktop.vue'
 import About from './views/About.vue'
 
-
 Vue.use(Element, {locale})
 Vue.use(VueRouter)
 
@@ -38,7 +37,6 @@ const router = new VueRouter({
     { path: '/Live', component: Live },
     { path: '/Desktop', component: Desktop },
     { path: '/About', component: About }
-
   ]
 })
 
