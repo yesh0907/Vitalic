@@ -22,6 +22,7 @@
 <script>
 import headtrackr from '../util/headtrackr.js'
 import mathmatical from '../util/mathmatical.js'
+import utilities from '../util/utilities.js'
 
 // import $ from 'jquery'
 // import _ from 'underscore'
@@ -139,32 +140,18 @@ function cardiac (array, bfWindow) {
   allHeartRates.push(heartrate)
 }
 
-function findHeartRate () {
+function parseData () {
+  // Recrod Object
+  let record = {}
+
+  // Heart Rate
   let rates = {}
-  // console.log('B4', allHeartRates)
-
   allHeartRates = mathmatical.filterOutliers(allHeartRates)
-
-  // console.log('AFTER', allHeartRates)
-
   for (let i = 0; i < allHeartRates.length; i++) {
     let val = Math.round(allHeartRates[i])
     if (!rates[val]) rates[val] = 0
     rates[val]++
   }
-
-  console.log(rates)
-  // let max = 0
-  // let hr = 0
-  // for (let val in rates) {
-  //   if (rates[val] > max) {
-  //     max = rates[val]
-  //     hr = val
-  //   }
-  // }
-  // console.log('HR', hr)
-  // console.log('MAX', max)
-
   hr = 0
   let count = 0
   for (let val in rates) {
@@ -172,8 +159,31 @@ function findHeartRate () {
     count++
   }
   hr = Math.round(hr / count)
-  // console.log(max)
   console.log(hr)
+  record['heartRate'] = {}
+  record['heartRate']['value'] = hr
+  record['heartRate']['health'] = utilities.isHRHealthy(hr, 16)
+
+  // Blood Pressure
+  record['bloodPressure'] = utilities.calculateBP(hr, 'MALE', 16)
+  record['bloodPressure']['health'] = utilities.isBPHealthy(record['bloodPressure'])
+
+  // Cholesterol
+  record['cholesterol'] = utilities.checkChol(record['bloodPressure']['health'], record['heartRate']['health'])
+
+  // Stress
+  record['stress'] = utilities.checkStress(record['bloodPressure']['health'])
+
+  // Breathing Rate
+  record['breathingRate'] = utilities.calculateBreathingRate(16)
+
+  // Fever
+  record['fever'] = utilities.checkFever(record['bloodPressure']['diastolicPressure'], 16, 'MALE', hr)
+
+  // Mood
+  record['mood'] = utilities.checkMood(record['bloodPressure']['diastolicPressure'], 16, 'MALE', hr)
+
+  console.log(record)
 }
 
 function initWebSocket () {
@@ -248,7 +258,7 @@ export default {
       if (htracker.status !== 'stopped') {
         htracker.stop()
         video.pause()
-        findHeartRate()
+        parseData()
         clearInterval(this.countdown)
         this.time = 0
       } else {

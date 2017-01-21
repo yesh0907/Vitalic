@@ -12,7 +12,6 @@
       </div>
     </el-col>
   </el-row>
-
 </div>
 
 </template>
@@ -43,15 +42,6 @@ export default {
     }
   },
   mounted () {
-    for (let i = 0; i < 10; i++) {
-      this.$store.commit('newRecord', {
-        date: new Date().toString(),
-        heartrate: 90,
-        breathingRate: 12,
-        stressLevel: 'low',
-        bloodPressure: 12
-      })
-    }
   }
 }
 </script>

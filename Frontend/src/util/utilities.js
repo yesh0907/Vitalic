@@ -4,7 +4,10 @@ export default {
   isBPHealthy,
   checkChol,
   checkStress,
-  calculateBreathingRate
+  calculateBreathingRate,
+  checkFever,
+  checkMood,
+  checkBodyTemp
 }
 
 function isHRHealthy (HR, age) {
@@ -64,39 +67,27 @@ function calculateBreathingRate (age) {
 }
 
 function checkBodyTemp (diastolicPressure, age, gender, HR) {
-  var R = 18.5;
-  var Q = gender === 'MALE' ? 5.0 : 4.5;
-  var meanPulsePressure = Q * R;
+  const R = 18.5
+  const Q = gender === 'MALE' ? 5.0 : 4.5
+  const meanPulsePressure = Q * R
 
-  var pulsePressure = Math.abs(3.0 * (meanPulsePressure - diastolicPressure));
+  const pulsePressure = Math.abs(3.0 * (meanPulsePressure - diastolicPressure))
 
-  var derivedHR = (124.75 - .51*age - pulsePressure*(3.088-.007*age)) / ((-1.0*pulsePressure)*.004 + .9275);
+  const derivedHR = (124.75 - .51*age - pulsePressure*(3.088-.007*age)) / ((-1.0*pulsePressure)*.004 + .9275)
 
-  if (derivedHR < (HR * 0.9)) {
-    return "HIGH";
-  }
-  else if (derivedHR > (HR * 1.1)) {
-    return "LOW";
-  }
-  else {
-    return "NORMAL";
-  }
+  if (derivedHR < (HR * 0.9)) return "HIGH"
+  else if (derivedHR > (HR * 1.1)) return "LOW"
+  else return "NORMAL"
 }
 
 function checkFever (diastolicPressure, age, gender, HR) {
-  var bodyTemp = checkBodyTemp(diastolicPressure, age, gender, HR);
-  return bodyTemp === "HIGH" ? "YES" : "NO";
+  var bodyTemp = checkBodyTemp(diastolicPressure, age, gender, HR)
+  return bodyTemp === "HIGH" ? "YES" : "NO"
 }
 
 function checkMood (diastolicPressure, age, gender, HR) {
-  var bodyTemp = checkBodyTemp(diastolicPressure, age, gender, HR);
-  if (bodyTemp === "HIGH") {
-    return "POSITIVE";
-  }
-  else if (bodyTemp === "LOW") {
-    return "NEGATIVE";
-  }
-  else {
-    "NEUTRAL";
-  }
+  const bodyTemp = checkBodyTemp(diastolicPressure, age, gender, HR)
+  if (bodyTemp === "HIGH") return "POSITIVE"
+  else if (bodyTemp === "LOW") return "NEGATIVE"
+  else return "NEUTRAL"
 }
