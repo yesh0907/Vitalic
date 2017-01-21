@@ -9,6 +9,16 @@ const port = process.env.PORT || 8664;
 import router from './routes/routes';
 import initPassport from './config/passport';
 
+const allowCrossDomain = function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+
+    next();
+}
+
+app.use(allowCrossDomain);
+
 app.set('trust proxy', 1);
 app.use(bodyParser.json());								// Support JSON-encoded bodies
 app.use(bodyParser.urlencoded({ extended: true }));		// Support URL-encoded bodies
