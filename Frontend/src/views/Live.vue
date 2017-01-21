@@ -3,13 +3,14 @@
   <br>
   <br>
   <div class="main card">
+
     <canvas id="canvas"></canvas>
     <el-row type="flex" align="middle" justify="center" class="row">
       <el-col :span="10">
-        <div class='heart'></div>
+        <el-button @click="toggleCap">{{record ? 'Stop' : 'Start'}}</el-button>
       </el-col>
       <el-col :span="14">
-        <h2 class="heartrate">Loading</h2>
+        <h2 class="heartrate">{{(Math.floor(time/60) < 10 ? '0'+Math.floor(time/60) : (Math.floor(time/60)))+':'+(time%60 < 10 ? '0'+time%60 : time%60)}}</h2>
       </el-col>
     </el-row>
     
@@ -24,16 +25,16 @@
 import headtrackr from '../util/headtrackr.js'
 import mathmatical from '../util/mathmatical.js'
 
-import $ from 'jquery'
+// import $ from 'jquery'
 
-const mean = mathmatical.mean
+// const mean = mathmatical.mean
 const frequencyExtract = mathmatical.frequencyExtract
 
 let video, canvas, context, htracker, spectrum
 let dataSocket, dataSend, renderTimer
 let width = 355
 let height = width * 0.75
-let fps = 15
+let fps = 45
 let heartrate = 60
 let bufferWindow = 512
 let sendingData = false
@@ -41,7 +42,7 @@ let red = []
 let green = []
 let blue = []
 let heartrateAverage = []
-let hrAvg = 65
+// let hrAvg = 65
 
 function initVideoStream () {
   video = document.createElement('video')
@@ -149,13 +150,13 @@ function cardiac (array, bfWindow) {
 
   if (heartrateAverage.length < 3) {
     heartrateAverage.push(heartrate)
-    hrAvg = heartrate
+    // hrAvg = heartrate
   } else {
     heartrateAverage.push(heartrate)
     heartrateAverage.shift()
-    hrAvg = mean(heartrateAverage)
+    // hrAvg = mean(heartrateAverage)
   }
-  $('.heartrate').text('Heartrate: ' + Math.round(hrAvg))
+  // $('.heartrate').text('Heartrate: ' + Math.round(hrAvg))
 }
 
 function initWebSocket () {
@@ -184,15 +185,17 @@ function sendData (data) {
 }
 
 export default {
-  // computed: {
-  //   width () {
-  //     return Math.min(380, this.$store.state.screenWidth)
-  //   },
-  //   height () {
-  //     return Math.min(380, this.$store.state.screenWidth) * 0.75
-  //   }
-  // },
+  data () {
+    return {
+      record: true,
+      time: 0,
+      countdown: null,
+      image: new Image()
+    }
+  },
   mounted () {
+    this.image.src = '/static/img/face.png'
+    this.image.onlaod = () => { console.log('loaded') }
     initVideoStream()
     initCanvas()
     initWebSocket()
@@ -204,14 +207,44 @@ export default {
     }, Math.round(1000))
 
     renderTimer = setInterval(function () {
-      context.drawImage(video, 0, 0, width, height)
-    }, Math.round(1000 / fps))
+      if (this.record) context.drawImage(video, 0, 0, width, height)
+      else if (this.image) {
+        context.fillStyle = '#3498db'
+        // context.fillRect(0, 0, width, height)
+        context.drawImage(this.image, (width - 150) / 2, (height - 164.2) / 2, 150, 164.2)
+      }
+    }.bind(this), Math.round(1000 / fps))
 
     headtrack()
+
+    this.countdown = setInterval(function () {
+      this.time++
+    }.bind(this), 1000)
   },
   beforeDestroy () {
     clearInterval(dataSend)
     clearInterval(renderTimer)
+    clearInterval(this.countdown)
+  },
+  methods: {
+    toggleCap () {
+      if (htracker.status !== 'stopped') {
+        htracker.stop()
+        video.pause()
+        clearInterval(this.countdown)
+        this.time = 0
+      } else {
+        htracker.start()
+        video.play()
+        this.countdown = setInterval(function () {
+          this.time++
+        }.bind(this), 1000)
+      }
+      setTimeout(function () {
+        this.record = htracker.status !== 'stopped'
+        console.log(htracker.status)
+      }.bind(this), 300)
+    }
   }
 }
 
@@ -250,66 +283,6 @@ export default {
 
 body {
   height: 100vh;
-}
-
-.heart {
-    position: relative;
-    width: 100px;
-    height: 90px;
-    transition: 2s all;
-    animation: heartscale 1s infinite;
-    margin: auto;
-    top: 42%;
-}
-.heart:before,
-.heart:after {
-    position: absolute;
-    content: "";
-    left: 50px;
-    top: 0;
-    width: 50px;
-    height: 80px;
-    background: #e74c3c;
-    -moz-border-radius: 50px 50px 0 0;
-    border-radius: 50px 50px 0 0;
-    -webkit-transform: rotate(-45deg);
-       -moz-transform: rotate(-45deg);
-        -ms-transform: rotate(-45deg);
-         -o-transform: rotate(-45deg);
-            transform: rotate(-45deg);
-    -webkit-transform-origin: 0 100%;
-       -moz-transform-origin: 0 100%;
-        -ms-transform-origin: 0 100%;
-         -o-transform-origin: 0 100%;
-            transform-origin: 0 100%;
-}
-.heart:after {
-    left: 0;
-    -webkit-transform: rotate(45deg);
-       -moz-transform: rotate(45deg);
-        -ms-transform: rotate(45deg);
-         -o-transform: rotate(45deg);
-            transform: rotate(45deg);
-    -webkit-transform-origin: 100% 100%;
-       -moz-transform-origin: 100% 100%;
-        -ms-transform-origin: 100% 100%;
-         -o-transform-origin: 100% 100%;
-            transform-origin :100% 100%;
-}
-
-/* .heart.pulse {
-  animation: heartscale 1s infinite;
-} */
-@keyframes heartscale {
-  0%, 100% {
-    transform: scale(0.5);
-  }
-  50% {
-    transform: scale(0.6);
-  }
-  90% {
-    transform: scale(0.485);
-  }
 }
 
 .row {
