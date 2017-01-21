@@ -6,11 +6,13 @@
 
 <script>
   import login from './views/Login'
+  import home from './views/Home'
 
   export default {
     name: 'app',
     components: {
-      login
+      login,
+      home
     },
     created () {
       window.addEventListener('resize', this.handleResize)
