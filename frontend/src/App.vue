@@ -1,10 +1,18 @@
 <template>
   <div id="app">
     <router-view></router-view>
+    <login><login>
   </div>
 </template>
 
 <script>
+  import login from './views/Login'
+  export default {
+    name: 'app',
+    components: {
+      login
+    }
+  }
 </script>
 
 <style>
