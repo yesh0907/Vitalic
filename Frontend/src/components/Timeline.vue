@@ -24,7 +24,7 @@ export default {
   },
   data () {
     return {
-      height: 55
+      height: 50
     }
   },
   props: ['moveTo']
@@ -55,8 +55,8 @@ export default {
   justify-content: center;
   align-items: center;
   color:#e74c3c;
-  height: 30px;
-  width: 30px;
+  height: 25px;
+  width: 25px;
   border-radius: 25px;
   background-color: #ffffff;
   position: fixed;
