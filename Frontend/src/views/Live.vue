@@ -4,7 +4,17 @@
   <br>
   <div class="main card">
     <canvas id="canvas"></canvas>
-    <h2 class="heartrate">Taking Video to calculate heartrate</h2>
+    <el-row type="flex" align="middle" justify="center" class="row">
+      <el-col :span="10">
+        <div class='heart'></div>
+      </el-col>
+      <el-col :span="14">
+        <h2 class="heartrate">Loading</h2>
+      </el-col>
+    </el-row>
+    
+
+    
   </div>
 </div>
 
@@ -237,5 +247,74 @@ export default {
 .card>.title {
   text-align: left;
 }
+
+body {
+  height: 100vh;
+}
+
+.heart {
+    position: relative;
+    width: 100px;
+    height: 90px;
+    transition: 2s all;
+    animation: heartscale 1s infinite;
+    margin: auto;
+    top: 42%;
+}
+.heart:before,
+.heart:after {
+    position: absolute;
+    content: "";
+    left: 50px;
+    top: 0;
+    width: 50px;
+    height: 80px;
+    background: #e74c3c;
+    -moz-border-radius: 50px 50px 0 0;
+    border-radius: 50px 50px 0 0;
+    -webkit-transform: rotate(-45deg);
+       -moz-transform: rotate(-45deg);
+        -ms-transform: rotate(-45deg);
+         -o-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+    -webkit-transform-origin: 0 100%;
+       -moz-transform-origin: 0 100%;
+        -ms-transform-origin: 0 100%;
+         -o-transform-origin: 0 100%;
+            transform-origin: 0 100%;
+}
+.heart:after {
+    left: 0;
+    -webkit-transform: rotate(45deg);
+       -moz-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+         -o-transform: rotate(45deg);
+            transform: rotate(45deg);
+    -webkit-transform-origin: 100% 100%;
+       -moz-transform-origin: 100% 100%;
+        -ms-transform-origin: 100% 100%;
+         -o-transform-origin: 100% 100%;
+            transform-origin :100% 100%;
+}
+
+/* .heart.pulse {
+  animation: heartscale 1s infinite;
+} */
+@keyframes heartscale {
+  0%, 100% {
+    transform: scale(0.5);
+  }
+  50% {
+    transform: scale(0.6);
+  }
+  90% {
+    transform: scale(0.485);
+  }
+}
+
+.row {
+width: 100%;
+}
+
 
 </style>
