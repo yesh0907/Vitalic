@@ -46,5 +46,10 @@
 
 html {
   /*background-color: #87CEFA;*/
-  background-color: #AEEEEE;}
+  background-color: #AEEEEE;
+}
+
+#headtrackerMessageDiv {
+  display: none !important;
+}
 </style>

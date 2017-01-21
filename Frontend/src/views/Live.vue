@@ -1,9 +1,11 @@
 <template>
-
-<div id="main">
-  <h2 class="heartrate">Taking Video to calculate heartrate</h2>
-  <canvas id="canvas"></canvas>
-  <canvas id="canvasOverlay" class="video"></canvas>
+<div class="container">
+  <br>
+  <br>
+  <div class="main card">
+    <canvas id="canvas"></canvas>
+    <h2 class="heartrate">Taking Video to calculate heartrate</h2>
+  </div>
 </div>
 
 </template>
@@ -19,8 +21,8 @@ const frequencyExtract = mathmatical.frequencyExtract
 
 let video, canvas, context, htracker, spectrum
 let dataSocket, dataSend, renderTimer
-let width = 380
-let height = 285
+let width = 355
+let height = width * 0.75
 let fps = 15
 let heartrate = 60
 let bufferWindow = 512
@@ -58,9 +60,10 @@ function initVideoStream () {
 
 function initCanvas () {
   canvas = document.getElementById('canvas')
+  context = canvas.getContext('2d')
+
   canvas.setAttribute('width', width)
   canvas.setAttribute('height', height)
-  context = canvas.getContext('2d')
   video.play()
 }
 
@@ -147,7 +150,7 @@ function cardiac (array, bfWindow) {
 
 function initWebSocket () {
   /* eslint-disable no-undef */
-  dataSocket = new WebSocket('ws://localhost:8888/echo')
+  dataSocket = new WebSocket('ws://api.vitalic.io/echo')
 
   dataSocket.onopen = () => {
     console.log('websocket open')
@@ -171,6 +174,14 @@ function sendData (data) {
 }
 
 export default {
+  // computed: {
+  //   width () {
+  //     return Math.min(380, this.$store.state.screenWidth)
+  //   },
+  //   height () {
+  //     return Math.min(380, this.$store.state.screenWidth) * 0.75
+  //   }
+  // },
   mounted () {
     initVideoStream()
     initCanvas()
@@ -195,3 +206,36 @@ export default {
 }
 
 </script>
+
+<style scoped>
+
+.main {
+  
+  display: flex;
+  /*justify-content: center;*/
+  align-items: center;
+  flex-direction: column;
+  background-color: white;
+  max-width: 355px;
+  margin: auto;
+}
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    background-color: #ffffff;
+
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.card>.content {
+    padding: 2px 16px;
+}
+
+.card>.title {
+  text-align: left;
+}
+
+</style>
