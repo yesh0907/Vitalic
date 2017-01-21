@@ -1,7 +1,7 @@
 <template>
   <el-row>
     <el-col :span="16" :offset="4">
-      <el-card id="homeInfo">
+      <el-card id="aboutInfo">
         <div slot="header" class="clearfix">
           <span style="line-height: 36px; color: #e74c3c"><h1>About Vitalic</h1></span>
         </div>
