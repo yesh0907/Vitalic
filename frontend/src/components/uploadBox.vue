@@ -1,7 +1,7 @@
 <template>
   <div id="uploadBox">
     <el-button type="" @click="dialogVisible = true">Upload File</el-button>
-    <el-dialog title="Tips" v-model="dialogVisible" size="medium">
+    <el-dialog title="Upload" v-model="dialogVisible" size="medium">
       <upload></upload>
       <span slot="footer" class="dialog-footer">
         <el-button @click="dialogVisible = false">Cancel</el-button>
@@ -21,6 +21,11 @@
     data () {
       return {
         dialogVisible: false
+      }
+    },
+    methods: {
+      finishLoading () {
+
       }
     }
   }
