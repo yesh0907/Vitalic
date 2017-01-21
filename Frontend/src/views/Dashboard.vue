@@ -5,7 +5,7 @@
     <el-col :span="4">
       <Timeline :move-to="moveTo" id="timelinePadding"></Timeline>
     </el-col>
-    <el-col :span="20">
+    <el-col :span="20" style="overflow: hidden;">
       <div id="uploadPadding"><el-row><uploadBox></uploadBox></el-row></div>
       <div v-for="(each, id) in $store.state.records" >
         <Item :data="each" :ref="id"></Item>
