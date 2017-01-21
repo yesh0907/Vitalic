@@ -46,6 +46,10 @@ export default {
   position: relative;
 }
 
+.item {
+  margin: auto;
+}
+
 .dot {
   display: flex;
   justify-content: center;
