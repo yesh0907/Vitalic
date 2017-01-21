@@ -24,9 +24,9 @@ function calculateBP (HR, gender, age) {
   let Q = gender === 'MALE' ? 5.0 : 4.5
 
   let ejectionTime = 364.5 - (1.23 * HR)
-  let bodySurfaceArea = 0.007184 * (Math.pow(137, 0.425)) * (Math.pow(66, 0.725))
+  let bodySurfaceArea = 0.007184 * (Math.pow(120, 0.425)) * (Math.pow(66, 0.725))
   let strokeVolume = -6.6 + 0.25 * (ejectionTime - 35) - 0.62 * HR + 40.4 * bodySurfaceArea - 0.51 * age
-  let pulsePressure = Math.abs(strokeVolume / ((0.013 * 137 - 0.007 * age - 0.004 * HR) + 1.307))
+  let pulsePressure = Math.abs(strokeVolume / ((0.013 * 120 - 0.007 * age - 0.004 * HR) + 1.307))
   let meanPulsePressure = Q * R
 
   let systolicPressure = Math.round(meanPulsePressure + 4.5 / 3 * pulsePressure)
