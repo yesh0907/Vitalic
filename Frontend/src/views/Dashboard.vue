@@ -1,6 +1,7 @@
 <template>
 
 <div class="container">
+  <div id="uploadPadding"><el-row><uploadBox></uploadBox></el-row></div>
   <el-row type="flex">
     <el-col :span="4">
       <Timeline :move-to="moveTo"></Timeline>
@@ -12,7 +13,7 @@
       </div>
     </el-col>
   </el-row>
-  
+
 </div>
 
 </template>
@@ -20,13 +21,15 @@
 <script>
 import Item from '../components/Item'
 import Timeline from '../components/Timeline'
+import uploadBox from '../components/uploadBox'
 
 import $ from 'jquery'
 
 export default {
   components: {
     Item,
-    Timeline
+    Timeline,
+    uploadBox
   },
   data () {
     return {
@@ -54,5 +57,7 @@ export default {
 </script>
 
 <style>
-
+#uploadPadding {
+  padding: 50px
+}
 </style>
