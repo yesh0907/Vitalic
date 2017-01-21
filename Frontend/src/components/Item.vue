@@ -7,12 +7,12 @@
   <div class="content">
     <el-row :gutter="20" :padding="20">
       <el-col :span="6" :offset="1"><h4>Heart Rate</h4></el-col>
-      <el-col :span="6"><h4>Mood</h4></el-col>
+      <el-col :span="6"><h4>Breathing Rate</h4></el-col>
       <el-col :span="6"><h4>Blood Pressure</h4></el-col>
     </el-row>
     <el-row :gutter="20" :padding="20">
       <el-col :span="6" :offset="1"><h2 v-bind:style="">{{ data.heartrate }}</h2></el-col>
-      <el-col :span="6"><h2>{{ data.mood.charAt(0).toUpperCase() + data.mood.slice(1) }}</h2></el-col>
+      <el-col :span="6"><h2>{{ data.breathingRate }}</h2></el-col>
       <el-col :span="6"><h2>{{ data.bloodPressure }}</h2></el-col>
     </el-row>
     <h2></h2>

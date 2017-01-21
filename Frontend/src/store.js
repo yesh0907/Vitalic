@@ -10,7 +10,8 @@ const state = {
     'a42936c9458ddf1451f91a5831ab670c': {
       'date': 'Sat Jan 21 2017 19:12:24 GMT+0800 (SGT)',
       'heartrate': 90,
-      'mood': 'happy',
+      'stressLevel': 'low',
+      'breathingRate': 12,
       'bloodPressure': 12,
       'count': 1
     }
