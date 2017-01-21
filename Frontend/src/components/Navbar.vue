@@ -29,4 +29,8 @@
   float: right;
   text-align: center;
 }
+
+.route {
+  text-decoration: none;
+}
 </style>
