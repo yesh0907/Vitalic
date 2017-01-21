@@ -54,7 +54,8 @@ export default {
       this.$store.commit('newRecord', {
         date: new Date().toString(),
         heartrate: 90,
-        mood: 'happy',
+        breathingRate: 12,
+        stressLevel: 'low',
         bloodPressure: 12
       })
     };
