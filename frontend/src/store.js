@@ -7,6 +7,13 @@ Vue.use(Vuex)
 // each Vuex instance is just a single state tree.
 const state = {
   records: {
+    'a42936c9458ddf1451f91a5831ab670c': {
+      'date': 'Sat Jan 21 2017 19:12:24 GMT+0800 (SGT)',
+      'heartrate': 90,
+      'mood': 'happy',
+      'bloodPressure': 12,
+      'count': 1
+    }
   },
   screenWidth: 0,
   screenHeight: 0

@@ -1,7 +1,9 @@
 <template>
 
 <div class="container">
-  <div class="title"><el-row><el-col :offset="1"><h2>{{data.date.substring(0, 10)}}</h2></el-col></el-row></div>
+  <div class="title"><el-row><el-col :offset="1"><h2>{{
+    date
+    }}</h2></el-col></el-row></div>
   <div class="content">
     <el-row :gutter="20" :padding="20">
       <el-col :span="6" :offset="1"><h4>Heart Rate</h4></el-col>
@@ -20,8 +22,15 @@
 </template>
 
 <script>
+import moment from 'moment'
+
 export default {
-  props: ['data']
+  props: ['data'],
+  computed: {
+    date () {
+      return moment(this.data.date).fromNow()
+    }
+  }
 }
 </script>
 
