@@ -5,7 +5,8 @@
        <live></live>
      </el-tab-pane>
      <el-tab-pane label="Latest Results">
-       <el-carousel :interval="3000" height="200px">
+       <homeCarousel></homeCarousel>
+       <!-- <el-carousel :interval="3000" height="200px">
          <el-carousel-item>
            <h3>Heart Rate: <h2>{{ $store.state.records['a42936c9458ddf1451f91a5831ab670c'].heartrate }}</h2></h3>
          </el-carousel-item>
@@ -18,7 +19,7 @@
          <el-carousel-item>
            <h3>Blood Pressure: <h2>{{ $store.state.records['a42936c9458ddf1451f91a5831ab670c'].bloodPressure }}</h2></h3>
          </el-carousel-item>
-      </el-carousel>
+      </el-carousel> -->
      </el-tab-pane>
     </el-tabs>
   </div>
@@ -26,10 +27,12 @@
 
 <script>
   import live from '../views/Live'
+  import homeCarousel from './homeCarousel'
   export default {
     name: 'homeTabs',
     components: {
-      live
+      live,
+      homeCarousel
     },
     data () {
       return {

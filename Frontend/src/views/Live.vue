@@ -4,6 +4,7 @@
   <br>
   <div class="main card">
     <canvas id="canvas"></canvas>
+    <br>
     <el-row type="flex" align="middle" justify="center" class="row">
       <el-col :span="10">
         <div class='heart'></div>
@@ -31,7 +32,7 @@ const frequencyExtract = mathmatical.frequencyExtract
 
 let video, canvas, context, htracker, spectrum
 let dataSocket, dataSend, renderTimer
-let width = 355
+let width = 500
 let height = width * 0.75
 let fps = 15
 let heartrate = 60

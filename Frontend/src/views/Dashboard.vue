@@ -26,6 +26,7 @@ import uploadBox from '../components/uploadBox'
 import $ from 'jquery'
 
 export default {
+  name: 'dashboard',
   components: {
     Item,
     Timeline,
