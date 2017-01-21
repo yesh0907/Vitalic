@@ -15,6 +15,7 @@
       home
     },
     created () {
+      this.handleResize()
       window.addEventListener('resize', this.handleResize)
     },
     beforeDestroy () {
@@ -22,7 +23,10 @@
     },
     methods: {
       handleResize () {
-        this.$store.commit('resize', { size: window.innerWidth })
+        this.$store.commit('resize', {
+          width: window.innerWidth,
+          height: window.innerHeight
+        })
       }
     }
   }

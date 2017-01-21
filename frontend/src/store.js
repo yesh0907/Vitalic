@@ -7,15 +7,9 @@ Vue.use(Vuex)
 // each Vuex instance is just a single state tree.
 const state = {
   records: {
-    'f92c8457a2b2a9cf0b29a938bb03aec4': {
-      'date': '2017-01-21T08:20:04.112Z',
-      'heartrate': 90,
-      'mood': 'happy',
-      'bloodPressure': 12,
-      'count': 1
-    }
   },
-  screenSize: 0
+  screenWidth: 0,
+  screenHeight: 0
 }
 
 // mutations are operations that actually mutates the state.
@@ -52,7 +46,8 @@ const mutations = {
     }
   },
   resize (state, update) {
-    Vue.set(state, 'screenSize', update.size)
+    Vue.set(state, 'screenWidth', update.width)
+    Vue.set(state, 'screenHeight', update.height)
   }
 }
 

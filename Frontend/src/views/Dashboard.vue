@@ -3,11 +3,11 @@
 <div class="container">
   <el-row type="flex">
     <el-col :span="4">
-      <Timeline></Timeline>
+      <Timeline :move-to="moveTo"></Timeline>
     </el-col>
     <el-col :span="20">
       <div v-for="(each, id) in $store.state.records">
-        <Item :data="each" :id="id"></Item>
+        <Item :data="each" :ref="id"></Item>
         <br>
       </div>
     </el-col>
@@ -21,6 +21,8 @@
 import Item from '../components/Item'
 import Timeline from '../components/Timeline'
 
+import $ from 'jquery'
+
 export default {
   components: {
     Item,
@@ -29,6 +31,13 @@ export default {
   data () {
     return {
       items: [1, 2, 3]
+    }
+  },
+  methods: {
+    moveTo (id) {
+      $('html, body').animate({
+        scrollTop: this.$refs[id][0].$el.offsetTop
+      }, 1000)
     }
   },
   mounted () {
