@@ -20,7 +20,6 @@
 <script>
   import detailCard from '../components/detailCard'
   export default {
-    name: 'details',
     components: {
       detailCard
     }

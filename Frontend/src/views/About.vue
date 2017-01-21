@@ -36,12 +36,12 @@
 
 <script>
   import homeTabs from '../components/homeTabs'
-  import Details from './Detail'
+  import Detail from './Detail'
   export default {
     name: 'about',
     components: {
       homeTabs,
-      Details
+      Detail
     },
     data () {
       return {
