@@ -23,7 +23,6 @@ import Live from './views/Live.vue'
 import Desktop from './views/Desktop.vue'
 import About from './views/About.vue'
 
-
 Vue.use(Element, {locale})
 Vue.use(VueRouter)
 

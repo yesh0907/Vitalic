@@ -33,7 +33,7 @@ const frequencyExtract = mathmatical.frequencyExtract
 
 let video, canvas, context, htracker, spectrum
 let dataSocket, dataSend, renderTimer
-let width = 500
+let width = 355
 let height = width * 0.75
 let fps = 45
 let heartrate = 60
