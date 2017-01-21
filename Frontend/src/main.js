@@ -37,7 +37,6 @@ const router = new VueRouter({
     { path: '/Live', component: Live },
     { path: '/Desktop', component: Desktop },
     { path: '/About', component: About }
-
   ]
 })
 
