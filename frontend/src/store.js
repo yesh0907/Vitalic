@@ -11,7 +11,8 @@ const state = {
       'date': '2017-01-21T08:20:04.112Z',
       'heartrate': 90,
       'mood': 'happy',
-      'bloodPressure': 12
+      'bloodPressure': 12,
+      'count': 1
     }
   },
   screenSize: 0
@@ -38,7 +39,8 @@ const mutations = {
       date: '',
       heartrate: 0,
       mood: '',
-      bloodPressure: 0
+      bloodPressure: 0,
+      count: Object.keys(state.records).length + 1
     }
     obj = Object.assign(obj, update)
 
