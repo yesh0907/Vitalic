@@ -12,9 +12,9 @@
         <h2 class="heartrate">Loading</h2>
       </el-col>
     </el-row>
-    
 
-    
+
+
   </div>
 </div>
 
@@ -192,6 +192,7 @@ export default {
   //     return Math.min(380, this.$store.state.screenWidth) * 0.75
   //   }
   // },
+  name: 'live',
   mounted () {
     initVideoStream()
     initCanvas()
@@ -220,7 +221,7 @@ export default {
 <style scoped>
 
 .main {
-  
+
   display: flex;
   /*justify-content: center;*/
   align-items: center;

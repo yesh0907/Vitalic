@@ -1,7 +1,9 @@
 <template>
   <div id="homeTabs">
     <el-tabs class="tab" type="border-card" @tab-click="handleClick">
-     <el-tab-pane label="LiveStream"></el-tab-pane>
+     <el-tab-pane label="LiveStream">
+       <live></live>
+     </el-tab-pane>
      <el-tab-pane label="Latest Results">
        <el-carousel :interval="3000" height="200px">
          <el-carousel-item>
@@ -23,8 +25,12 @@
 </template>
 
 <script>
+  import live from '../views/Live'
   export default {
     name: 'homeTabs',
+    components: {
+      live
+    },
     data () {
       return {
         activeName: 'first'
