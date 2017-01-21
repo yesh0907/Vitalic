@@ -208,11 +208,11 @@ export default {
     }, Math.round(1000))
 
     renderTimer = setInterval(function () {
-      if (this.record) context.drawImage(video, 0, 0, width, height)
-      else if (this.image) {
-        context.fillStyle = '#3498db'
-        // context.fillRect(0, 0, width, height)
-        context.drawImage(this.image, (width - 150) / 2, (height - 164.2) / 2, 150, 164.2)
+      if (this.record) {
+        context.drawImage(video, 0, 0, width, height)
+        if (this.image) {
+          context.drawImage(this.image, (width - 150) / 2, (height - 164.2) / 2, 150, 164.2)
+        }
       }
     }.bind(this), Math.round(1000 / fps))
 
