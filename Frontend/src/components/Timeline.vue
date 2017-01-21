@@ -24,7 +24,7 @@ export default {
   },
   data () {
     return {
-      height: 60
+      height: 55
     }
   },
   props: ['moveTo']

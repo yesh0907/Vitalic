@@ -43,6 +43,6 @@
 }
 
 html {
-  background-color: #c0392b;
-}
+  /*background-color: #87CEFA;*/
+  background-color: #AEEEEE;}
 </style>
