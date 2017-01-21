@@ -5,6 +5,7 @@
   <div class="main card">
 
     <canvas id="canvas"></canvas>
+    <br>
     <el-row type="flex" align="middle" justify="center" class="row">
       <el-col :span="10">
         <el-button @click="toggleCap">{{record ? 'Stop' : 'Start'}}</el-button>
@@ -13,9 +14,9 @@
         <h2 class="heartrate">{{(Math.floor(time/60) < 10 ? '0'+Math.floor(time/60) : (Math.floor(time/60)))+':'+(time%60 < 10 ? '0'+time%60 : time%60)}}</h2>
       </el-col>
     </el-row>
-    
 
-    
+
+
   </div>
 </div>
 
@@ -32,7 +33,7 @@ const frequencyExtract = mathmatical.frequencyExtract
 
 let video, canvas, context, htracker, spectrum
 let dataSocket, dataSend, renderTimer
-let width = 355
+let width = 500
 let height = width * 0.75
 let fps = 45
 let heartrate = 60
@@ -253,7 +254,7 @@ export default {
 <style scoped>
 
 .main {
-  
+
   display: flex;
   /*justify-content: center;*/
   align-items: center;

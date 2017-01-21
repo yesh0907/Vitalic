@@ -6,6 +6,7 @@
       <Timeline :move-to="moveTo"></Timeline>
     </el-col>
     <el-col :span="20" style="overflow: hidden;">
+      <div id="uploadPadding"><el-row><uploadBox></uploadBox></el-row></div>
       <div v-for="(each, id) in $store.state.records" >
         <Item :data="each" :ref="id"></Item>
         <br>
@@ -19,20 +20,19 @@
 
 <script>
 import Item from '../components/Item'
-import Timeline from '../components/Timeline'
+import uploadBox from '../components/uploadBox'
 
 import $ from 'jquery'
 
 export default {
-  name: 'dashboard',
+  name: 'dashboardOnePage',
   components: {
     Item,
-    Timeline
+    uploadBox
   },
   data () {
     return {
-      items: [1, 2, 3],
-      element: Timeline
+      items: [1, 2, 3]
     }
   },
   methods: {
@@ -57,4 +57,8 @@ export default {
 </script>
 
 <style>
+#uploadPadding {
+  padding: 50px
+}
+
 </style>
