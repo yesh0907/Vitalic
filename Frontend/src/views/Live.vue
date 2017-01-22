@@ -75,13 +75,13 @@ function initCanvas () {
 
   canvas.setAttribute('width', width)
   canvas.setAttribute('height', height)
-  video.play()
+  // video.play()
 }
 
 function headtrack () {
   htracker = new headtrackr.Tracker({detectionInterval: 1000 / fps})
   htracker.init(video, canvas, context)
-  htracker.start()
+  // htracker.start()
 
   document.addEventListener('facetrackingEvent', greenRect)
 }
@@ -157,10 +157,6 @@ function parseData () {
     }
   }
   console.log(hr)
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/master
   record['heartRate'] = {}
   record['heartRate']['value'] = hr
   record['heartRate']['health'] = utilities.isHRHealthy(hr, 16)
@@ -224,18 +220,10 @@ export default {
   },
   mounted () {
     this.image.src = '/static/img/face.png'
-    this.image.onlaod = () => { console.log('loaded') }
     initVideoStream()
     initCanvas()
     initWebSocket()
-
-    setTimeout(function () {
-      htracker.stop()
-      video.pause()
-      clearInterval(this.countdown)
-      this.time = 0
-      sendingData = false
-    }.bind(this), 300)
+    headtrack()
 
     dataSend = setInterval(function () {
       if (sendingData) {
@@ -251,12 +239,6 @@ export default {
         }
       }
     }.bind(this), Math.round(1000 / fps))
-
-    headtrack()
-
-    this.countdown = setInterval(function () {
-      this.time++
-    }.bind(this), 1000)
   },
   beforeDestroy () {
     clearInterval(dataSend)
@@ -265,7 +247,8 @@ export default {
   },
   methods: {
     toggleCap () {
-      if (htracker.status !== 'stopped') {
+      if (htracker.status !== 'stopped' && htracker.status !== '') {
+        console.log('stop')
         htracker.stop()
         video.pause()
         sendingData = false
