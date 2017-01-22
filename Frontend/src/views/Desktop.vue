@@ -1,6 +1,6 @@
 <template>
 <div class="container">
-  <el-menu class="el-menu-demo" mode="horizontal" id="nav" router="true">
+  <el-menu class="el-menu-demo" mode="horizontal" id="nav" :router="true">
     <el-menu-item index="/">Home</el-menu-item>
     <el-menu-item index="/About">About</el-menu-item>
     <el-menu-item index="/Desktop">Dashboard</el-menu-item>
@@ -25,6 +25,26 @@ export default {
   components: {
     Dashboard,
     Live
+  },
+  created () {
+    // for (let i = 0; i < 10; i++) {
+    //   this.$store.commit('newRecord', {
+    //     stress: 'NORMAL',
+    //     heartRate: {
+    //       value: 88,
+    //       health: 'GOOD'
+    //     },
+    //     cholesterol: 'NORMAL',
+    //     mood: 'NORMAL',
+    //     bloodPressure: {
+    //       systolicPressure: 20,
+    //       diastolicPressure: 70,
+    //       health: 'GOOD'
+    //     },
+    //     breathingRate: 20,
+    //     fever: 'NONE'
+    //   })
+    // }
   }
 }
 </script>
