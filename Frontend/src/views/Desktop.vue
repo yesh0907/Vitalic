@@ -13,10 +13,11 @@
   <el-row>
     <el-col :span="16"><Dashboard></Dashboard></el-col>
     <el-col :span="8">
-      <el-row><Live style="position: fixed; display: block; right:5%;"></Live></el-row>
+      <el-row>
+        <Live style="position: fixed; display: block; right:5%;"></Live>
+      </el-row>
     </el-col>
   </el-row>
-  <el-button type="success">More Data</el-button>
 </div>
 
 </template>
@@ -25,32 +26,16 @@
 import Dashboard from './Dashboard'
 import Live from './Live'
 import Detail from './Detail'
+import uploadBox from '../components/uploadBox'
 
 export default {
   components: {
     Dashboard,
     Live,
-    Detail
+    Detail,
+    uploadBox
   },
   created () {
-    for (let i = 0; i < 10; i++) {
-      this.$store.commit('newRecord', {
-        stress: 'NORMAL',
-        heartRate: {
-          value: 88,
-          health: 'GOOD'
-        },
-        cholesterol: 'NORMAL',
-        mood: 'NORMAL',
-        bloodPressure: {
-          systolicPressure: 20,
-          diastolicPressure: 70,
-          health: 'GOOD'
-        },
-        breathingRate: 20,
-        fever: 'NONE'
-      })
-    }
   }
 }
 </script>
