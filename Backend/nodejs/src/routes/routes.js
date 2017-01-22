@@ -98,7 +98,7 @@ module.exports = (passport) => {
 			heartRate['health'] = req.body.heartRateHealth;
 
 			const mood = req.body.mood;
-			const stressLevel = req.body.stressLevel;
+			const stress = req.body.stress;
 			const breathingRate = req.body.breathingRate;
 			const cholesterolLevel = req.body.cholesterolLevel;
 			const fever = req.body.fever;
@@ -107,7 +107,7 @@ module.exports = (passport) => {
 				heartRate,
 				mood,
 			 	bloodPressure,
-				stressLevel,
+				stress,
 				breathingRate,
 				cholesterolLevel,
 				bodyTemperature
