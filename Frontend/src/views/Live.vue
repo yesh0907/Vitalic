@@ -184,7 +184,7 @@ function parseData () {
 
 function initWebSocket () {
   /* eslint-disable no-undef */
-  dataSocket = new WebSocket('ws://api.vitalic.io/echo')
+  dataSocket = new WebSocket('wss://api.vitalic.io/echo')
 
   dataSocket.onopen = () => {
     console.log('websocket open')
