@@ -85,7 +85,7 @@ module.exports = (passport) => {
 	});
 
 	// Clear all vals in DB
-	rouer.post('/record/delete', (req, res) => {
+	router.post('/record/delete', (req, res) => {
 		const email = req.body.email;
 
 		if (email) {
