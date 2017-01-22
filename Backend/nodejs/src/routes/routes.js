@@ -126,7 +126,7 @@ module.exports = (passport) => {
 						if (user) {
 							user.records.push(newRecord);
 							user.save();
-							res.json({ success: 'true' });
+							res.json({ success: 'true', data: newRecord });
 						}
 						else {
 							res.json({ success: 'false', reason: 'User does not exist' });
