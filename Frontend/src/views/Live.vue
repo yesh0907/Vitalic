@@ -157,7 +157,7 @@ function parseData () {
     }
   }
   console.log(hr)
-  
+
   record['heartRate'] = {}
   record['heartRate']['value'] = hr
   record['heartRate']['health'] = utilities.isHRHealthy(hr, 16)
