@@ -157,7 +157,6 @@ function parseData () {
     }
   }
   console.log(hr)
-  
   record['heartRate'] = {}
   record['heartRate']['value'] = hr
   record['heartRate']['health'] = utilities.isHRHealthy(hr, 16)
@@ -404,7 +403,7 @@ width: 100%;
   -moz-osx-font-smoothing: grayscale;
   margin: auto;
   margin-top: 0%;
-  
+
 }
 
 /* .heart.pulse {
