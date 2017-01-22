@@ -20,7 +20,7 @@
         <el-col :span="12">
           <h3>
             <i :class="'fa fa-'+ format(key, each)[1] " aria-hidden="true"></i>
-            {{key}}
+            {{capitalizeLetter(key)}}
             </h3>
         </el-col>
         <el-col :span="12">
@@ -74,7 +74,7 @@ export default {
   props: ['data'],
   computed: {
     date () {
-      return moment(this.data.date).fromNow()
+      return this.capitalizeFirstLetter(moment(this.data.date).fromNow())
     },
     formalDate () {
       return moment(this.data.date).format('MMMM Do YYYY hh:mm')
@@ -87,7 +87,7 @@ export default {
         case 'stress':
           return [each, 'hand-rock-o']
         case 'heartRate':
-          return [each.health + ' ' + Math.floor(each.value), 'heart']
+          return [each.health + ' (' + Math.floor(each.value) + ' BPM)', 'heart']
         case 'cholesterol':
           return [each, 'medkit']
         case 'mood':
@@ -124,6 +124,19 @@ export default {
         default:
           return ''
       }
+    },
+    capitalizeLetter (word) {
+      const newWord = word.replace(/([A-Z])/g, ' $1').trim()
+
+      return this.toTitleCase(newWord)
+    },
+    toTitleCase (str) {
+      return str.replace(/\w\S*/g, function (txt) {
+        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
+      })
+    },
+    capitalizeFirstLetter (str) {
+      return str.substring(0, 1).toUpperCase() + str.substring(1)
     }
   }
 }
