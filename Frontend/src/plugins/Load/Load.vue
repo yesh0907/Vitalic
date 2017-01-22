@@ -15,7 +15,7 @@
 <style scoped>
 
 .container {
-  position: fixed;
+  position: absolute;
   display: block;
   width: 100vw;
   height: 100vh;
