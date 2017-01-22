@@ -84,6 +84,20 @@ module.exports = (passport) => {
 		});
 	});
 
+	// Clear all vals in DB
+	rouer.post('/record/delete', (req, res) => {
+		const email = req.body.email;
+
+		if (email) {
+			Record.remove({});
+			res.json({ 'success': 'true' })
+		}
+		else {
+			res.json({ success: 'false', reason: 'Missing Credentials' });
+			return;
+		}
+	})
+
 	// Store Data in DB
 	router.post('/records/new', (req, res) => {
 		const email = req.body.email;
