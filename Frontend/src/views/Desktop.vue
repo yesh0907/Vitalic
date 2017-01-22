@@ -1,6 +1,6 @@
 <template>
 <div class="container">
-  <el-menu class="el-menu-demo" mode="horizontal" id="nav" router="true">
+  <el-menu class="el-menu-demo" mode="horizontal" id="nav" :router="true">
     <el-menu-item index="/">Home</el-menu-item>
     <el-menu-item index="/About">About</el-menu-item>
     <el-menu-item index="/Desktop">Dashboard</el-menu-item>

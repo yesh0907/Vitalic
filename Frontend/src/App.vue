@@ -16,6 +16,7 @@
     },
     created () {
       this.handleResize()
+      this.$store.dispatch('fetchAllRecords')
       window.addEventListener('resize', this.handleResize)
     },
     beforeDestroy () {

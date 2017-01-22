@@ -184,7 +184,7 @@ function parseData () {
   // Mood
   record['mood'] = utilities.checkMood(record['bloodPressure']['diastolicPressure'], 16, 'MALE', hr)
 
-  console.log(record)
+  return record
 }
 
 function initWebSocket () {
@@ -218,7 +218,8 @@ export default {
       record: true,
       time: 0,
       countdown: null,
-      image: new Image()
+      image: new Image(),
+      loading: null
     }
   },
   mounted () {
@@ -259,10 +260,10 @@ export default {
       if (htracker.status !== 'stopped') {
         htracker.stop()
         video.pause()
-        parseData()
+        this.$store.commit('newRecord', parseData())
         clearInterval(this.countdown)
         this.time = 0
-        Loading.service({
+        this.loading = Loading.service({
           fullscreen: true,
           lock: true,
           customClass: 'loading'
