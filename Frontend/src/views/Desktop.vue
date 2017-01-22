@@ -4,7 +4,7 @@
     <el-menu-item index="/">Home</el-menu-item>
     <el-menu-item index="/About">About</el-menu-item>
     <el-menu-item index="/Desktop">Dashboard</el-menu-item>
-    <el-menu-item style="float: right" index="/Detail:uuid">More Data</el-menu-item>
+    <el-menu-item style="float: right" index="/Detail">More Data</el-menu-item>
   </el-menu>
   <br>
   <br>
