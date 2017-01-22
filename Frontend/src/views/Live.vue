@@ -75,13 +75,13 @@ function initCanvas () {
 
   canvas.setAttribute('width', width)
   canvas.setAttribute('height', height)
-  video.play()
+  // video.play()
 }
 
 function headtrack () {
   htracker = new headtrackr.Tracker({detectionInterval: 1000 / fps})
   htracker.init(video, canvas, context)
-  htracker.start()
+  // htracker.start()
 
   document.addEventListener('facetrackingEvent', greenRect)
 }
@@ -157,7 +157,6 @@ function parseData () {
     }
   }
   console.log(hr)
-  
   record['heartRate'] = {}
   record['heartRate']['value'] = hr
   record['heartRate']['health'] = utilities.isHRHealthy(hr, 16)
@@ -212,7 +211,7 @@ function sendData (data) {
 export default {
   data () {
     return {
-      record: true,
+      record: false,
       time: 0,
       countdown: null,
       image: new Image(),
@@ -221,10 +220,10 @@ export default {
   },
   mounted () {
     this.image.src = '/static/img/face.png'
-    this.image.onlaod = () => { console.log('loaded') }
     initVideoStream()
     initCanvas()
     initWebSocket()
+    headtrack()
 
     dataSend = setInterval(function () {
       if (sendingData) {
@@ -240,12 +239,6 @@ export default {
         }
       }
     }.bind(this), Math.round(1000 / fps))
-
-    headtrack()
-
-    this.countdown = setInterval(function () {
-      this.time++
-    }.bind(this), 1000)
   },
   beforeDestroy () {
     clearInterval(dataSend)
@@ -254,11 +247,11 @@ export default {
   },
   methods: {
     toggleCap () {
-      if (htracker.status !== 'stopped') {
+      if (htracker.status !== 'stopped' && htracker.status !== '') {
+        console.log('stop')
         htracker.stop()
         video.pause()
         sendingData = false
-        clearInterval(dataSend)
         parseData()
         this.$store.dispatch('newRecord', parseData())
         .then((result) => {
@@ -281,6 +274,7 @@ export default {
       } else {
         htracker.start()
         video.play()
+        sendingData = true
         this.countdown = setInterval(function () {
           this.time++
         }.bind(this), 1000)
@@ -404,7 +398,7 @@ width: 100%;
   -moz-osx-font-smoothing: grayscale;
   margin: auto;
   margin-top: 0%;
-  
+
 }
 
 /* .heart.pulse {
