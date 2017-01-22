@@ -11,7 +11,7 @@
       </div>
       <div v-if="infoType == 'Stress Level'">
         <h3>Latest: {{$store.state.records['a42936c9458ddf1451f91a5831ab670c'].stressLevel.charAt(0).toUpperCase() + $store.state.records['a42936c9458ddf1451f91a5831ab670c'].stressLevel.substring(1)}}</h3>
-        <chartComponent typeOfData="Number of High Stress Days" :dataStuffs="[3, 6, 5, 5, 10, 8, 4, 8, 6, 6, 10, 9]"></chartComponent>
+        <chartComponent typeOfData="High Stress Days" :dataStuffs="[3, 6, 5, 5, 10, 8, 4, 8, 6, 6, 10, 9]"></chartComponent>
       </div>
       <div v-if="infoType == 'Breathing Rate'">
         <h3>Latest: {{$store.state.records['a42936c9458ddf1451f91a5831ab670c'].breathingRate}}</h3>
@@ -20,6 +20,14 @@
       <div v-if="infoType == 'Blood Pressure'">
         <h3>Latest: {{$store.state.records['a42936c9458ddf1451f91a5831ab670c'].bloodPressure}}</h3>
         <chartComponent typeOfData="Blood Pressure" :dataStuffs="[16, 14, 12, 12, 13, 11, 15, 14, 12, 13, 14, 12]"></chartComponent>
+      </div>
+      <div v-if="infoType == 'Mood'">
+        <h3>Latest: {{$store.state.records['a42936c9458ddf1451f91a5831ab670c'].mood}}</h3>
+        <chartComponent typeOfData="Mood" :dataStuffs="[16, 14, 12, 12, 13, 11, 15, 14, 12, 13, 14, 12]"></chartComponent>
+      </div>
+      <div v-if="infoType == 'Cholesterol Level'">
+        <h3>Latest: {{$store.state.records['a42936c9458ddf1451f91a5831ab670c'].bloodPressure}}</h3>
+        <chartComponent typeOfData="High Cholesterol Days" :dataStuffs="[5, 3, 4, 7, 12, 9, 14, 15, 13, 16, 18, 18]"></chartComponent>
       </div>
     </div>
     <div>

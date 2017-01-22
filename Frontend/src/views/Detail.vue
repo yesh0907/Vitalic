@@ -7,13 +7,21 @@
         <detailCard infoType="Heart Rate"></detailCard>
       </el-col>
       <el-col :span="6">
-        <detailCard infoType="Stress Level"></detailCard>
+        <detailCard infoType="Mood"></detailCard>
       </el-col>
       <el-col :span="6">
         <detailCard infoType="Breathing Rate"></detailCard>
       </el-col>
       <el-col :span="6">
         <detailCard infoType="Blood Pressure"></detailCard>
+      </el-col>
+    </el-row>
+    <el-row :gutter="20">
+      <el-col :span="6" :offset="6">
+        <detailCard infoType="Stress Level"></detailCard>
+      </el-col>
+      <el-col :span="6">
+        <detailCard infoType="Cholesterol Level"></detailCard>
       </el-col>
     </el-row>
   </div>
