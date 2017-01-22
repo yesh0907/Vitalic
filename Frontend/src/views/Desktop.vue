@@ -4,6 +4,7 @@
     <el-menu-item index="/">Home</el-menu-item>
     <el-menu-item index="/About">About</el-menu-item>
     <el-menu-item index="/Desktop">Dashboard</el-menu-item>
+    <el-menu-item style="float: right" index="/Detail:uuid">More Data</el-menu-item>
   </el-menu>
   <br>
   <br>
@@ -11,8 +12,11 @@
   <br>
   <el-row>
     <el-col :span="16"><Dashboard></Dashboard></el-col>
-    <el-col :span="8"><Live style="position: fixed; display: block; right:5%;"></Live></el-col>
+    <el-col :span="8">
+      <el-row><Live style="position: fixed; display: block; right:5%;"></Live></el-row>
+    </el-col>
   </el-row>
+  <el-button type="success">More Data</el-button>
 </div>
 
 </template>
@@ -20,11 +24,13 @@
 <script>
 import Dashboard from './Dashboard'
 import Live from './Live'
+import Detail from './Detail'
 
 export default {
   components: {
     Dashboard,
-    Live
+    Live,
+    Detail
   }
 }
 </script>

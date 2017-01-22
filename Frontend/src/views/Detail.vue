@@ -1,5 +1,7 @@
 <template>
   <div id="details">
+    <navbar></navbar>
+    <br>
     <el-row :gutter="20">
       <el-col :span="6">
         <detailCard infoType="Heart Rate"></detailCard>
@@ -19,9 +21,11 @@
 
 <script>
   import detailCard from '../components/detailCard'
+  import navbar from '../components/navbar'
   export default {
     components: {
-      detailCard
+      detailCard,
+      navbar
     }
   }
 </script>
