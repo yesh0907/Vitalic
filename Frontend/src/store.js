@@ -10,15 +10,6 @@ Vue.use(Vuex)
 const state = {
   'email': 'yesh0907@hotmail.com',
   records: {
-    'a42936c9458ddf1451f91a5831ab670c': {
-      'date': 'Sat Jan 21 2017 19:12:24 GMT+0800 (SGT)',
-      'heartrate': 90,
-      'mood': 'happy',
-      'stressLevel': 'low',
-      'breathingRate': 12,
-      'bloodPressure': 12,
-      'count': 1
-    }
   },
   screenWidth: 0,
   screenHeight: 0
@@ -30,14 +21,29 @@ const state = {
 // mutations must be synchronous and can be recorded by plugins
 // for debugging purposes.
 const mutations = {
-  newRecord (state, update) {
-    $.ajax({
+  resize (state, update) {
+    Vue.set(state, 'screenWidth', update.width)
+    Vue.set(state, 'screenHeight', update.height)
+  },
+  setRecord (state, update) {
+    state.records = {
+      [update._id]: update,
+      ...state.records
+    }
+  }
+}
+
+// actions are functions that causes side effects and can involve
+// asynchronous operations.
+const actions = {
+  newRecord ({state}, update) {
+    return $.ajax({
       url: 'https://vitalic.io/api/records/new',
       dataType: 'json',
       type: 'POST',
       data: {
         email: state.email,
-        heartRate: update['heartRate'],
+        heartRate: update['heartRate']['value'],
         mood: update['mood'],
         diaBloodPressure: update['bloodPressure']['diastolicPressure'],
         sysBloodPressure: update['bloodPressure']['systolicPressure'],
@@ -47,39 +53,16 @@ const mutations = {
         fever: update['fever'],
         bloodPressureHealth: update['bloodPressure']['health'],
         heartRateHealth: update['heartRate']['health']
-      },
-      success: (result) => {
-        console.log(result)
-        const data = result['data']
-        Vue.set(state.records, data['_id'], data)
       }
     })
   },
-  resize (state, update) {
-    Vue.set(state, 'screenWidth', update.width)
-    Vue.set(state, 'screenHeight', update.height)
-  },
-  fetchRecords (state, update) {
-    $.ajax({
+  fetchAllRecords ({ commit, state }) {
+    return $.ajax({
       url: 'https://vitalic.io/api/records/all',
       dataType: 'json',
       data: { 'email': state.email },
-      type: 'POST',
-      success: (result) => {
-        const data = result['data']
-        for (let each of data) {
-          Vue.set(state.records, each['_id'], each)
-        }
-      }
+      type: 'POST'
     })
-  }
-}
-
-// actions are functions that causes side effects and can involve
-// asynchronous operations.
-const actions = {
-  fetchAllRecords ({ commit, state }) {
-    commit('fetchRecords')
   }
 }
 
