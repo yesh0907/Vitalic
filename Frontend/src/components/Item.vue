@@ -87,7 +87,7 @@ export default {
         case 'stress':
           return [each, 'hand-rock-o']
         case 'heartRate':
-          return [each.health + ' ' + each.value, 'heart']
+          return [each.health + ' ' + Math.floor(each.value), 'heart']
         case 'cholesterol':
           return [each, 'medkit']
         case 'mood':

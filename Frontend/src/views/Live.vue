@@ -157,6 +157,10 @@ function parseData () {
     }
   }
   console.log(hr)
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
   record['heartRate'] = {}
   record['heartRate']['value'] = hr
   record['heartRate']['health'] = utilities.isHRHealthy(hr, 16)
