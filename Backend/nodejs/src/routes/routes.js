@@ -84,29 +84,47 @@ module.exports = (passport) => {
 		});
 	});
 
+	// Clear all vals in DB
+	router.post('/record/delete', (req, res) => {
+		const email = req.body.email;
+
+		if (email) {
+			Record.remove({});
+			res.json({ 'success': 'true' })
+		}
+		else {
+			res.json({ success: 'false', reason: 'Missing Credentials' });
+			return;
+		}
+	})
+
 	// Store Data in DB
 	router.post('/records/new', (req, res) => {
 		const email = req.body.email;
 
 		if (email) {
-			let bp = {};
-			bp['sys'] = req.body.sysBloodPressure;
-			bp['dia'] = req.body.diaBloodPressure;
-			const heartRate = req.body.heartRate;
+			let bloodPressure = {};
+			bloodPressure['sys'] = req.body.sysBloodPressure;
+			bloodPressure['dia'] = req.body.diaBloodPressure;
+			bloodPressure['health'] = req.body.bloodPressureHealth;
+			let heartRate = {};
+			heartRate['value'] = req.body.heartRate;
+			heartRate['health'] = req.body.heartRateHealth;
+
 			const mood = req.body.mood;
-			const stressLevel = req.body.stressLevel;
+			const stress = req.body.stress;
 			const breathingRate = req.body.breathingRate;
-			const cholesterolLevel = req.body.cholesterolLevel;
-			const bodyTemperature = req.body.bodyTemperature;
+			const cholesterol = req.body.cholesterol;
+			const fever = req.body.fever;
 
 			const newRecord = new Record({
 				heartRate,
 				mood,
-				bloodPressure: bp,
-				stressLevel,
+			 	bloodPressure,
+				stress,
 				breathingRate,
-				cholesterolLevel,
-				bodyTemperature
+				cholesterol,
+				fever
 			});
 			newRecord.save((err, record) => {
 				if (err) {
@@ -122,7 +140,7 @@ module.exports = (passport) => {
 						if (user) {
 							user.records.push(newRecord);
 							user.save();
-							res.json({ success: 'true' });
+							res.json({ success: 'true', data: newRecord });
 						}
 						else {
 							res.json({ success: 'false', reason: 'User does not exist' });
@@ -145,6 +163,7 @@ module.exports = (passport) => {
 		if (email) {
 			User.findOne({ email })
 				.populate('records')
+				.sort('-data')
 				.exec((err, user) => {
 				if (err) {
 					res.json({ success: 'false', reason: 'Error with querying db...' });

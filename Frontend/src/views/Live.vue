@@ -145,50 +145,19 @@ function parseData () {
   // Recrod Object
   let record = {}
 
-  // allHeartRates.sort()
   console.log(allHeartRates)
 
   let minDiff = 1000000.0
   let hr = 0
-  console.log(allHeartRates.length)
   for (let i = 1; i < (allHeartRates.length - 1); i++) {
     let avgDiff = ((allHeartRates[i] - allHeartRates[i - 1]) + (allHeartRates[i + 1] - allHeartRates[i])) / 2
-    // console.log(avgDiff)
     if (avgDiff < minDiff) {
       minDiff = avgDiff
       hr = allHeartRates[i]
-      // console.log(hr)
     }
   }
-
-  // let max = 0
-  // let hr = 0
-  // let num = 0
-
-  // console.log(rates)
-
-  // for (let val in rates) {
-  //   if (rates[val] > max) {
-  //     max = rates[val]
-  //     num = val
-  //   }
-  // }
-
-  // let count = 0
-  // for (let val in rates) {
-  //   hr += parseInt(val)
-  //   count++
-  // }
-  // var temp = Math.round(hr / count)
-  // hr = Math.round(hr / count)
-
-  // if (max >= 3) {
-  //   hr = num
-  // } else if (max === 2) {
-  //   hr = (temp + num) / 2
-  // }
-
   console.log(hr)
+  
   record['heartRate'] = {}
   record['heartRate']['value'] = hr
   record['heartRate']['health'] = utilities.isHRHealthy(hr, 16)
@@ -212,7 +181,7 @@ function parseData () {
   // Mood
   record['mood'] = utilities.checkMood(record['bloodPressure']['diastolicPressure'], 16, 'MALE', hr)
 
-  console.log(record)
+  return record
 }
 
 function initWebSocket () {
@@ -246,7 +215,8 @@ export default {
       record: true,
       time: 0,
       countdown: null,
-      image: new Image()
+      image: new Image(),
+      loading: null
     }
   },
   mounted () {
@@ -290,9 +260,20 @@ export default {
         sendingData = false
         clearInterval(dataSend)
         parseData()
+        this.$store.dispatch('newRecord', parseData())
+        .then((result) => {
+          console.log(result)
+          let data = result['data']
+          this.$store.commit('setRecord', data)
+          this.loading.close()
+        })
+        .catch((e) => {
+          console.log(e)
+          this.loading.close()
+        })
         clearInterval(this.countdown)
         this.time = 0
-        Loading.service({
+        this.loading = Loading.service({
           fullscreen: true,
           lock: true,
           customClass: 'loading'

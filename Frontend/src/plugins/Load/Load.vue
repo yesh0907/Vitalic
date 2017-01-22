@@ -38,7 +38,7 @@
   width: 100%;
   height: 50%;
   will-change: transform;
-  
+
 }
 
 .panels {
@@ -100,7 +100,7 @@
 
 .openUp {
   animation-name: openUp;
-  
+
 }
 
 .openDown {

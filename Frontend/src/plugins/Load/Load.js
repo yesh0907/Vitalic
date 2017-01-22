@@ -6,7 +6,7 @@ function install (Vue, options) {
   // vars
   let done = true
   let skewAngle = 20
-  let scale = 1.65
+  let scale = 3
   let delay = 600
 
   // init el

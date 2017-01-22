@@ -1,21 +1,15 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+import $ from 'jquery'
+
 Vue.use(Vuex)
 
 // root state object.
 // each Vuex instance is just a single state tree.
 const state = {
+  'email': 'yesh0907@hotmail.com',
   records: {
-    'a42936c9458ddf1451f91a5831ab670c': {
-      'date': 'Sat Jan 21 2017 19:12:24 GMT+0800 (SGT)',
-      'heartrate': 90,
-      'mood': 'happy',
-      'stressLevel': 'low',
-      'breathingRate': 12,
-      'bloodPressure': 12,
-      'count': 1
-    }
   },
   screenWidth: 0,
   screenHeight: 0
@@ -27,44 +21,50 @@ const state = {
 // mutations must be synchronous and can be recorded by plugins
 // for debugging purposes.
 const mutations = {
-  newRecord (state, update) {
-    const uuid = () => {
-      function s4 () {
-        return Math.floor((1 + Math.random()) * 0x10000)
-          .toString(16)
-          .substring(1)
-      }
-      return s4() + s4() + s4() + s4() +
-        s4() + s4() + s4() + s4()
-    }
-
-    let obj = {
-      date: '',
-      heartrate: 0,
-      mood: '',
-      bloodPressure: 0,
-      stressLevel: '',
-      breathingRate: 0,
-      count: Object.keys(state.records).length + 1
-    }
-    obj = Object.assign(obj, update)
-
-    let id = uuid()
-    while (id in state.records) id = uuid()
-    state.records = {
-      [id]: obj,
-      ...state.records
-    }
-  },
   resize (state, update) {
     Vue.set(state, 'screenWidth', update.width)
     Vue.set(state, 'screenHeight', update.height)
+  },
+  setRecord (state, update) {
+    state.records = {
+      [update._id]: update,
+      ...state.records
+    }
   }
 }
 
 // actions are functions that causes side effects and can involve
 // asynchronous operations.
-const actions = {}
+const actions = {
+  newRecord ({state}, update) {
+    return $.ajax({
+      url: 'https://vitalic.io/api/records/new',
+      dataType: 'json',
+      type: 'POST',
+      data: {
+        email: state.email,
+        heartRate: update['heartRate']['value'],
+        mood: update['mood'],
+        diaBloodPressure: update['bloodPressure']['diastolicPressure'],
+        sysBloodPressure: update['bloodPressure']['systolicPressure'],
+        stress: update['stress'],
+        breathingRate: update['breathingRate'],
+        cholesterol: update['cholesterol'],
+        fever: update['fever'],
+        bloodPressureHealth: update['bloodPressure']['health'],
+        heartRateHealth: update['heartRate']['health']
+      }
+    })
+  },
+  fetchAllRecords ({ commit, state }) {
+    return $.ajax({
+      url: 'https://vitalic.io/api/records/all',
+      dataType: 'json',
+      data: { 'email': state.email },
+      type: 'POST'
+    })
+  }
+}
 
 // getters are functions
 const getters = {}
