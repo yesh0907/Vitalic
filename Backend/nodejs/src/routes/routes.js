@@ -100,7 +100,7 @@ module.exports = (passport) => {
 			const mood = req.body.mood;
 			const stress = req.body.stress;
 			const breathingRate = req.body.breathingRate;
-			const cholesterolLevel = req.body.cholesterolLevel;
+			const cholesterol = req.body.cholesterol;
 			const fever = req.body.fever;
 
 			const newRecord = new Record({
@@ -109,7 +109,7 @@ module.exports = (passport) => {
 			 	bloodPressure,
 				stress,
 				breathingRate,
-				cholesterolLevel,
+				cholesterol,
 				fever
 			});
 			newRecord.save((err, record) => {
