@@ -89,20 +89,23 @@ module.exports = (passport) => {
 		const email = req.body.email;
 
 		if (email) {
-			let bp = {};
-			bp['sys'] = req.body.sysBloodPressure;
-			bp['dia'] = req.body.diaBloodPressure;
-			const heartRate = req.body.heartRate;
+			let bloodPressure = {};
+			bloodPressure['sys'] = req.body.sysBloodPressure;
+			bloodPressure['dia'] = req.body.diaBloodPressure;
+			let heartRate = {};
+			heartRate['value'] = req.body.heartRate;
+			heartRate['health'] = req.body.heartRateHealth;
+
 			const mood = req.body.mood;
 			const stressLevel = req.body.stressLevel;
 			const breathingRate = req.body.breathingRate;
 			const cholesterolLevel = req.body.cholesterolLevel;
-			const bodyTemperature = req.body.bodyTemperature;
+			const fever = req.body.fever;
 
 			const newRecord = new Record({
 				heartRate,
 				mood,
-				bloodPressure: bp,
+			 	bloodPressure,
 				stressLevel,
 				breathingRate,
 				cholesterolLevel,
