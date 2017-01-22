@@ -43,7 +43,6 @@ let red = []
 let green = []
 let blue = []
 let allHeartRates = []
-let hr = 0
 
 function initVideoStream () {
   video = document.createElement('video')
@@ -153,7 +152,21 @@ function parseData () {
     if (!rates[val]) rates[val] = 0
     rates[val]++
   }
-  hr = 0
+  let max = 0
+  let hr = 0
+  let num = 0
+
+  console.log(rates)
+
+  for (let val in rates) {
+    if (val > max) {
+      max = rates[val]
+      num = val
+    }
+  }
+
+  console.log(num)
+
   let count = 0
   for (let val in rates) {
     hr += parseInt(val)
