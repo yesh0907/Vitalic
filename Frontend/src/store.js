@@ -50,10 +50,8 @@ const mutations = {
       },
       success: (result) => {
         console.log(result)
-        // state.records = {
-        //   [id]: obj,
-        //   ...state.records
-        // }
+        const data = result['data']
+        Vue.set(state.records, data['_id'], data)
       }
     })
   },
