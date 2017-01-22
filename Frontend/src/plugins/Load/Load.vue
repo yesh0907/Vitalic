@@ -15,7 +15,7 @@
 <style scoped>
 
 .container {
-  position: absolute;
+  position: fixed;
   display: block;
   width: 100vw;
   height: 100vh;
@@ -38,7 +38,7 @@
   width: 100%;
   height: 50%;
   will-change: transform;
-  
+
 }
 
 .panels {
@@ -100,7 +100,7 @@
 
 .openUp {
   animation-name: openUp;
-  
+
 }
 
 .openDown {

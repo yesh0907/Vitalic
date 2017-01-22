@@ -149,6 +149,7 @@ module.exports = (passport) => {
 		if (email) {
 			User.findOne({ email })
 				.populate('records')
+				.sort('-data')
 				.exec((err, user) => {
 				if (err) {
 					res.json({ success: 'false', reason: 'Error with querying db...' });
