@@ -3,7 +3,7 @@
     <el-row>
       <el-col :span="6" :offset="4"><router-link to="/"><img id="logo" src="../assets/v_logo_v.png"/></router-link></el-col>
       <el-col class="menu" :span="6" :offset="5" style="">
-        <el-menu class="el-menu-demo" mode="horizontal" style="float: left" router="true">
+        <el-menu class="el-menu-demo" mode="horizontal" style="float: left" :router="true">
           <el-menu-item index="/">Home</el-menu-item>
           <el-menu-item index="/About">About</el-menu-item>
           <el-menu-item index="/Desktop">Dashboard</el-menu-item>
