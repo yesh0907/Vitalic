@@ -35,7 +35,7 @@ let video, canvas, context, htracker, spectrum
 let dataSocket, dataSend, renderTimer
 let width = 355
 let height = width * 0.75
-let fps = 45
+let fps = 60
 let heartrate = 60
 let bufferWindow = 512
 let sendingData = false
@@ -136,6 +136,7 @@ function cardiac (array, bfWindow) {
   let freqs = frequencyExtract(spectrum, fps)
   let freq = freqs.freqInHertz
   heartrate = freq * 60
+  console.log('HR:', heartrate)
 
   allHeartRates.push(heartrate)
 }
@@ -144,35 +145,49 @@ function parseData () {
   // Recrod Object
   let record = {}
 
-  // Heart Rate
-  let rates = {}
-  allHeartRates = mathmatical.filterOutliers(allHeartRates)
-  for (let i = 0; i < allHeartRates.length; i++) {
-    let val = Math.round(allHeartRates[i])
-    if (!rates[val]) rates[val] = 0
-    rates[val]++
-  }
-  let max = 0
+  // allHeartRates.sort()
+  console.log(allHeartRates)
+
+  let minDiff = 1000000.0
   let hr = 0
-  let num = 0
-
-  console.log(rates)
-
-  for (let val in rates) {
-    if (val > max) {
-      max = rates[val]
-      num = val
+  console.log(allHeartRates.length)
+  for (let i = 1; i < (allHeartRates.length - 1); i++) {
+    let avgDiff = ((allHeartRates[i] - allHeartRates[i - 1]) + (allHeartRates[i + 1] - allHeartRates[i])) / 2
+    // console.log(avgDiff)
+    if (avgDiff < minDiff) {
+      minDiff = avgDiff
+      hr = allHeartRates[i]
+      // console.log(hr)
     }
   }
 
-  console.log(num)
+  // let max = 0
+  // let hr = 0
+  // let num = 0
 
-  let count = 0
-  for (let val in rates) {
-    hr += parseInt(val)
-    count++
-  }
-  hr = Math.round(hr / count)
+  // console.log(rates)
+
+  // for (let val in rates) {
+  //   if (rates[val] > max) {
+  //     max = rates[val]
+  //     num = val
+  //   }
+  // }
+
+  // let count = 0
+  // for (let val in rates) {
+  //   hr += parseInt(val)
+  //   count++
+  // }
+  // var temp = Math.round(hr / count)
+  // hr = Math.round(hr / count)
+
+  // if (max >= 3) {
+  //   hr = num
+  // } else if (max === 2) {
+  //   hr = (temp + num) / 2
+  // }
+
   console.log(hr)
   record['heartRate'] = {}
   record['heartRate']['value'] = hr
@@ -272,6 +287,8 @@ export default {
       if (htracker.status !== 'stopped') {
         htracker.stop()
         video.pause()
+        sendingData = false
+        clearInterval(dataSend)
         parseData()
         clearInterval(this.countdown)
         this.time = 0
