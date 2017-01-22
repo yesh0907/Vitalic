@@ -136,7 +136,6 @@ function cardiac (array, bfWindow) {
   let freqs = frequencyExtract(spectrum, fps)
   let freq = freqs.freqInHertz
   heartrate = freq * 60
-  console.log('HR:', heartrate)
 
   allHeartRates.push(heartrate)
 }
@@ -153,11 +152,11 @@ function parseData () {
     let avgDiff = ((allHeartRates[i] - allHeartRates[i - 1]) + (allHeartRates[i + 1] - allHeartRates[i])) / 2
     if (avgDiff < minDiff) {
       minDiff = avgDiff
-      hr = allHeartRates[i]
+      hr = Math.round(allHeartRates[i])
     }
   }
   console.log(hr)
-  
+
   record['heartRate'] = {}
   record['heartRate']['value'] = hr
   record['heartRate']['health'] = utilities.isHRHealthy(hr, 16)
