@@ -22,7 +22,7 @@
         <chartComponent typeOfData="Blood Pressure" :dataStuffs="[16, 14, 12, 12, 13, 11, 15, 14, 12, 13, 14, 12]"></chartComponent>
       </div>
       <div v-if="infoType == 'Mood'">
-        <h3>Latest: {{$store.state.records['a42936c9458ddf1451f91a5831ab670c'].mood}}</h3>
+        <h3>Latest: {{$store.state.records['a42936c9458ddf1451f91a5831ab670c'].mood.charAt(0).toUpperCase() + $store.state.records['a42936c9458ddf1451f91a5831ab670c'].mood.substring(1)}}</h3>
         <chartComponent typeOfData="Mood" :dataStuffs="[16, 14, 12, 12, 13, 11, 15, 14, 12, 13, 14, 12]"></chartComponent>
       </div>
       <div v-if="infoType == 'Cholesterol Level'">
