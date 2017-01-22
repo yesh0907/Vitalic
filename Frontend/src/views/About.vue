@@ -30,8 +30,8 @@
 
 <style>
 #logo {
-  height: 15vh;
-  width: 50vh;
+  height: 100px;
+  width: 300px;
   overflow: hidden;
 }
 
