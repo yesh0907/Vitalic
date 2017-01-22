@@ -157,7 +157,10 @@ function parseData () {
     }
   }
   console.log(hr)
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
   record['heartRate'] = {}
   record['heartRate']['value'] = hr
   record['heartRate']['health'] = utilities.isHRHealthy(hr, 16)
@@ -212,7 +215,7 @@ function sendData (data) {
 export default {
   data () {
     return {
-      record: true,
+      record: false,
       time: 0,
       countdown: null,
       image: new Image(),
@@ -225,6 +228,14 @@ export default {
     initVideoStream()
     initCanvas()
     initWebSocket()
+
+    setTimeout(function () {
+      htracker.stop()
+      video.pause()
+      clearInterval(this.countdown)
+      this.time = 0
+      sendingData = false
+    }.bind(this), 300)
 
     dataSend = setInterval(function () {
       if (sendingData) {
@@ -258,7 +269,6 @@ export default {
         htracker.stop()
         video.pause()
         sendingData = false
-        clearInterval(dataSend)
         parseData()
         this.$store.dispatch('newRecord', parseData())
         .then((result) => {
@@ -281,6 +291,7 @@ export default {
       } else {
         htracker.start()
         video.play()
+        sendingData = true
         this.countdown = setInterval(function () {
           this.time++
         }.bind(this), 1000)
