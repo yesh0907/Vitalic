@@ -50,10 +50,7 @@
     },
     data () {
       return {
-        heartrateData: [78, 84, 95, 92, 77, 87, 73, 75, 86, 94, 90],
-        stressLevelData: [78, 84, 95, 92, 77, 87, 73, 75, 86, 94, 90],
-        breathingRateData: [78, 84, 95, 92, 77, 87, 73, 75, 86, 94, 90],
-        bloodPressureData: [78, 84, 95, 92, 77, 87, 73, 75, 86, 94, 90]
+
       }
     },
     methods: {
