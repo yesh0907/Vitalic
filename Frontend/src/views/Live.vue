@@ -260,7 +260,17 @@ export default {
       if (htracker.status !== 'stopped') {
         htracker.stop()
         video.pause()
-        this.$store.commit('newRecord', parseData())
+        this.$store.dispatch('newRecord', parseData())
+        .then((result) => {
+          console.log(result)
+          let data = result['data']
+          this.$store.commit('setRecord', data)
+          this.loading.close()
+        })
+        .catch((e) => {
+          console.log(e)
+          this.loading.close()
+        })
         clearInterval(this.countdown)
         this.time = 0
         this.loading = Loading.service({

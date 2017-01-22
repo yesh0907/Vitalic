@@ -17,6 +17,15 @@
     created () {
       this.handleResize()
       this.$store.dispatch('fetchAllRecords')
+      .then((result) => {
+        const data = result['data']
+        for (let each of data) {
+          this.$store.commit('setRecord', each)
+        }
+      })
+      .catch((e) => {
+        console.log(e)
+      })
       window.addEventListener('resize', this.handleResize)
     },
     beforeDestroy () {
