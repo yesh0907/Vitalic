@@ -37,24 +37,6 @@ export default {
     uploadBox
   },
   created () {
-    for (let i = 0; i < 10; i++) {
-      this.$store.commit('newRecord', {
-        stress: 'NORMAL',
-        heartRate: {
-          value: 88,
-          health: 'GOOD'
-        },
-        cholesterol: 'NORMAL',
-        mood: 'NORMAL',
-        bloodPressure: {
-          systolicPressure: 20,
-          diastolicPressure: 70,
-          health: 'GOOD'
-        },
-        breathingRate: 20,
-        fever: 'NONE'
-      })
-    }
   }
 }
 </script>
