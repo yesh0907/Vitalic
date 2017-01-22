@@ -35,7 +35,7 @@ let video, canvas, context, htracker, spectrum
 let dataSocket, dataSend, renderTimer
 let width = 355
 let height = width * 0.75
-let fps = 45
+let fps = 60
 let heartrate = 60
 let bufferWindow = 512
 let sendingData = false
@@ -43,7 +43,6 @@ let red = []
 let green = []
 let blue = []
 let allHeartRates = []
-let hr = 0
 
 function initVideoStream () {
   video = document.createElement('video')
@@ -137,6 +136,7 @@ function cardiac (array, bfWindow) {
   let freqs = frequencyExtract(spectrum, fps)
   let freq = freqs.freqInHertz
   heartrate = freq * 60
+  console.log('HR:', heartrate)
 
   allHeartRates.push(heartrate)
 }
@@ -145,22 +145,19 @@ function parseData () {
   // Recrod Object
   let record = {}
 
-  // Heart Rate
-  let rates = {}
-  allHeartRates = mathmatical.filterOutliers(allHeartRates)
-  for (let i = 0; i < allHeartRates.length; i++) {
-    let val = Math.round(allHeartRates[i])
-    if (!rates[val]) rates[val] = 0
-    rates[val]++
+  console.log(allHeartRates)
+
+  let minDiff = 1000000.0
+  let hr = 0
+  for (let i = 1; i < (allHeartRates.length - 1); i++) {
+    let avgDiff = ((allHeartRates[i] - allHeartRates[i - 1]) + (allHeartRates[i + 1] - allHeartRates[i])) / 2
+    if (avgDiff < minDiff) {
+      minDiff = avgDiff
+      hr = allHeartRates[i]
+    }
   }
-  hr = 0
-  let count = 0
-  for (let val in rates) {
-    hr += parseInt(val)
-    count++
-  }
-  hr = Math.round(hr / count)
   console.log(hr)
+  
   record['heartRate'] = {}
   record['heartRate']['value'] = hr
   record['heartRate']['health'] = utilities.isHRHealthy(hr, 16)
@@ -260,6 +257,9 @@ export default {
       if (htracker.status !== 'stopped') {
         htracker.stop()
         video.pause()
+        sendingData = false
+        clearInterval(dataSend)
+        parseData()
         this.$store.dispatch('newRecord', parseData())
         .then((result) => {
           console.log(result)
