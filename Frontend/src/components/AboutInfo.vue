@@ -11,11 +11,29 @@
         </p>
         <h4>About The Team</h4>
         <p>
-          We are a team of four from Singapore American School, sharing a common passion for programming and benefitting the community with our hacks. Our two backend developers, Yesh and Sarthak, originally developed the idea while _________. Will and Alan were then approached for their frontend development skills, which were important for a consumer-friendly final product. Vitalic’s algorithms for the various statistics that we monitor were developed by Sarthak, while most of the Django backend was designed by Yesh. Will and Alan collaborated to create a Vue.js based frontend, which combined the best minds with the best Javascript platform. Will was primarily in charge of the UI/UX of the website, while Alan worked hard with Yesh to create a seamless flow of information between the Frontend and Backend.
+          We are a team of four from Singapore American School, sharing a common passion for programming and benefitting the community with our hacks. Our two backend developers, Yesh and Sarthak, originally developed the idea and then approached Alan and Will for their frontend development skills, which were important for a consumer-friendly final product. Vitalic’s algorithms for the numerous statistics and vital signs that we monitor were developed by Sarthak, while most of the Django backend was designed by Yesh. Will and Alan collaborated to create a Vue.js based frontend, which combined the best minds with the best Javascript platform. Will was primarily in charge of the UI/UX of the website and collaborated with Sarthak to implement the algorithms into the Frontend, while Alan worked hard with Yesh to create a seamless flow of information between the Frontend and Backend.
         </p>
         <h4>About Our Measurements</h4>
         <p>
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+          <b>Heart Rate</b> - the speed of the heartbeat, measured by the number of beats of the heart per minute (bpm). Heart Rate serves as the fundamental measurement for determining several other vital signs.
+        </p>
+        <p>
+          <b>Blood Pressure</b> - the pressure of circulating blood on the walls of blood vessels, measured in millimeters of Mercury (mmHg). Blood pressure is important to maintain a healthy flow of oxygenated blood throughout the body.
+        </p>
+        <p>
+          <b>Breathing Rate</b> - the rate at which an individual takes breaths, measured in breaths per minute. Breathing rate is important to identifying any respiratory issues.
+        </p>
+        <p>
+          <b>Cholestrol Levels</b> - a type of lipid (fat) in the human blood. High cholestrol results in an increased chance of heart attack and stroke.
+        </p>
+        <p>
+          <b>Stress Levels</b> - a feeling of emotional strain and pressure, typically caused by difficult or upsetting situations. Stress can have a major impact on blood pressure, overall happiness, and even lifespan.
+        </p>
+        <p>
+          <b>Body Temperature/Fever</b> - when the body is at a temperature above its healthy range. While most fevers are mild and can be treated with over-the-counter medication, in some cases, fevers can cause brain failure and death.
+        </p>
+        <p>
+          <b>Mood</b> - in simplest terms, a temporary state of emotion, typically classified by having a positive, neutral, or negative valence. Mood is directly influenced by events and stimulus.
         </p>
       </el-card>
     </el-col>
