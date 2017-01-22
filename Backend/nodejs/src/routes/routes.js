@@ -110,7 +110,7 @@ module.exports = (passport) => {
 				stress,
 				breathingRate,
 				cholesterolLevel,
-				bodyTemperature
+				fever
 			});
 			newRecord.save((err, record) => {
 				if (err) {
