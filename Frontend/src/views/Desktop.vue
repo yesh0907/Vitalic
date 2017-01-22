@@ -14,7 +14,6 @@
     <el-col :span="16"><Dashboard></Dashboard></el-col>
     <el-col :span="8">
       <el-row>
-        <uploadBox></uploadBox>
         <Live style="position: fixed; display: block; right:5%;"></Live>
       </el-row>
     </el-col>
