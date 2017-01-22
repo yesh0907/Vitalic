@@ -92,6 +92,7 @@ module.exports = (passport) => {
 			let bloodPressure = {};
 			bloodPressure['sys'] = req.body.sysBloodPressure;
 			bloodPressure['dia'] = req.body.diaBloodPressure;
+			bloodPressure['health'] = req.body.bloodPressureHealth;
 			let heartRate = {};
 			heartRate['value'] = req.body.heartRate;
 			heartRate['health'] = req.body.heartRateHealth;
