@@ -13,7 +13,10 @@
   <el-row>
     <el-col :span="16"><Dashboard></Dashboard></el-col>
     <el-col :span="8">
-      <el-row><Live style="position: fixed; display: block; right:5%;"></Live></el-row>
+      <el-row>
+        <uploadBox></uploadBox>
+        <Live style="position: fixed; display: block; right:5%;"></Live>
+      </el-row>
     </el-col>
   </el-row>
 </div>
@@ -24,12 +27,14 @@
 import Dashboard from './Dashboard'
 import Live from './Live'
 import Detail from './Detail'
+import uploadBox from '../components/uploadBox'
 
 export default {
   components: {
     Dashboard,
     Live,
-    Detail
+    Detail,
+    uploadBox
   },
   created () {
     for (let i = 0; i < 10; i++) {

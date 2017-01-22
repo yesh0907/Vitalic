@@ -1,6 +1,6 @@
 <template>
   <div id="uploadBox">
-    <el-button type="" @click="dialogVisible = true">Upload File</el-button>
+    <el-button size="large" @click="dialogVisible = true">Upload Video</el-button>
     <el-dialog title="Upload" v-model="dialogVisible" size="medium">
       <upload></upload>
       <span slot="footer" class="dialog-footer">
