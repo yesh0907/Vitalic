@@ -1,9 +1,19 @@
 <template>
 
 <div class="container">
-  <div class="title"><el-row><el-col :offset="1"><h2>{{
-    date
-    }}</h2></el-col></el-row></div>
+  <div class="title">
+    <el-row justify="space-between" type="flex" align="middle">
+      <el-col :offset="1" :span="11">
+        <h2 style="display: inline-block;">{{date}}</h2>
+      </el-col>
+      <el-col :span="12">
+        <h2 style="display: inline-block;">
+          <i class="fa fa-calendar" aria-hidden="true"></i>
+            {{formalDate}}
+        </h2>
+      </el-col>
+    </el-row>
+  </div>
   <div class="content">
     <div v-for="(each, key) in data" v-if="!format(key, each)[2]" id="tb">
       <el-row type="flex" justify="center" align="middle">
@@ -19,6 +29,39 @@
       </el-row>
       <hr>
     </div>
+
+    <el-row id="tb" type="flex" justify="center" align="middle">
+      <el-col :span="12">
+        <h3>Systolic Pressure</h3>
+      </el-col>
+      <el-col :span="12">
+        <h3>
+            {{data.bloodPressure.sys}}
+        </h3>
+      </el-col>
+    </el-row>
+    <hr>
+    <el-row id="tb" type="flex" justify="center" align="middle">
+      <el-col :span="12">
+        <h3>Diastolic Pressure</h3>
+      </el-col>
+      <el-col :span="12">
+        <h3>
+            {{data.bloodPressure.dia}}
+        </h3>
+      </el-col>
+    </el-row>
+    <hr>
+    <el-row id="tb" type="flex" justify="center" align="middle">
+      <el-col :span="12">
+        <h3>General Blood Pressure</h3>
+      </el-col>
+      <el-col :span="12">
+        <h3>
+            {{data.bloodPressure.health}}
+        </h3>
+      </el-col>
+    </el-row>
   </div>
 </div>
 
@@ -32,13 +75,15 @@ export default {
   computed: {
     date () {
       return moment(this.data.date).fromNow()
+    },
+    formalDate () {
+      return moment(this.data.date).format('MMMM Do YYYY hh:mm')
     }
+
   },
   methods: {
     format (key, each) {
       switch (key) {
-        case 'date':
-          return [moment(each).format('MMMM Do YYYY hh:mm'), 'calendar']
         case 'stress':
           return [each, 'hand-rock-o']
         case 'heartRate':
@@ -52,8 +97,10 @@ export default {
         case 'fever':
           return [each, 'sun-o']
         case 'bloodPressure':
-          return ['Systolic Pressure: ' + each.systolicPressure + ', Diastolic Pressure: ' + each.diastolicPressure + ', Total: ' + each.health, '']
+        case 'date':
         case 'count':
+        case '__v':
+        case '_id':
           return ['', '', true]
         default:
           return ['', '']

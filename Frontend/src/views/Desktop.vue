@@ -16,7 +16,6 @@
       <el-row><Live style="position: fixed; display: block; right:5%;"></Live></el-row>
     </el-col>
   </el-row>
-  <el-button type="success">More Data</el-button>
 </div>
 
 </template>
