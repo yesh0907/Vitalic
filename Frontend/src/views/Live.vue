@@ -25,10 +25,6 @@ import headtrackr from '../util/headtrackr.js'
 import mathmatical from '../util/mathmatical.js'
 import utilities from '../util/utilities.js'
 
-// import $ from 'jquery'
-// import _ from 'underscore'
-
-// const mean = mathmatical.mean
 const frequencyExtract = mathmatical.frequencyExtract
 
 let video, canvas, context, htracker, spectrum
@@ -75,15 +71,17 @@ function initCanvas () {
 
   canvas.setAttribute('width', width)
   canvas.setAttribute('height', height)
-  // video.play()
 }
 
 function headtrack () {
   htracker = new headtrackr.Tracker({detectionInterval: 1000 / fps})
   htracker.init(video, canvas, context)
-  // htracker.start()
 
   document.addEventListener('facetrackingEvent', greenRect)
+}
+
+function getAgeAndGender () {
+  console.log(context.getImageData(0, 0, canvas.width, canvas.height))
 }
 
 function greenRect (event) {
@@ -145,15 +143,24 @@ function parseData () {
   let record = {}
 
   console.log(allHeartRates)
-
-  let minDiff = 1000000.0
   let hr = 0
-  for (let i = 1; i < (allHeartRates.length - 1); i++) {
-    let avgDiff = ((allHeartRates[i] - allHeartRates[i - 1]) + (allHeartRates[i + 1] - allHeartRates[i])) / 2
-    if (avgDiff < minDiff) {
-      minDiff = avgDiff
-      hr = Math.round(allHeartRates[i])
+
+  if (allHeartRates.length > 2) {
+    let minDiff = 1000000.0
+    for (let i = 1; i < (allHeartRates.length - 1); i++) {
+      let avgDiff = ((allHeartRates[i] - allHeartRates[i - 1]) + (allHeartRates[i + 1] - allHeartRates[i])) / 2
+      if (avgDiff < minDiff) {
+        minDiff = avgDiff
+        hr = Math.round(allHeartRates[i])
+      }
     }
+  } else {
+    if (allHeartRates.length === 2) {
+      for (let i = 0; i < allHeartRates.length; i++) {
+        hr += i
+      }
+      hr = hr / allHeartRates.length
+    } else if (allHeartRates.length === 1) hr = allHeartRates
   }
   console.log(hr)
   record['heartRate'] = {}
@@ -184,7 +191,7 @@ function parseData () {
 
 function initWebSocket () {
   /* eslint-disable no-undef */
-  dataSocket = new WebSocket('wss://api.vitalic.io/echo')
+  dataSocket = new WebSocket('wss://vitalic.herokuapp.com/echo')
 
   dataSocket.onopen = () => {
     console.log('websocket open')
@@ -248,6 +255,7 @@ export default {
     toggleCap () {
       if (htracker.status !== 'stopped' && htracker.status !== '') {
         console.log('stop')
+        getAgeAndGender()
         htracker.stop()
         video.pause()
         sendingData = false
@@ -271,6 +279,7 @@ export default {
           customClass: 'loading'
         })
       } else {
+        allHeartRates = []
         htracker.start()
         video.play()
         sendingData = true
@@ -293,7 +302,6 @@ export default {
 .main {
 
   display: flex;
-  /*justify-content: center;*/
   align-items: center;
   flex-direction: column;
   background-color: white;
@@ -304,7 +312,6 @@ export default {
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
     background-color: #ffffff;
-
 }
 
 .card:hover {
@@ -326,8 +333,6 @@ body {
 .row {
 width: 100%;
 }
-
-
 </style>
 
 
