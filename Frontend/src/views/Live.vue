@@ -21,6 +21,8 @@
 
 <script>
 import { Loading } from 'element-ui'
+import * as Filepicker from 'node-filepicker'
+import crypto from 'crypto'
 import headtrackr from '../util/headtrackr.js'
 import mathmatical from '../util/mathmatical.js'
 import utilities from '../util/utilities.js'
@@ -81,7 +83,12 @@ function headtrack () {
 }
 
 function getAgeAndGender () {
-  console.log(context.getImageData(0, 0, canvas.width, canvas.height))
+  const apiKey = 'AgCtmwvkmQ7iiHoAsHgSwz'
+  const filepicker = Filepicker.default(apiKey)
+
+  filepicker.store(canvas.toDataURL('image/png'), crypto.randomBytes(4).toString('hex') + '.png', 'image/png', { path: '/' }).then((res) => {
+    console.log(JSON.parse(res))
+  })
 }
 
 function greenRect (event) {
@@ -256,10 +263,10 @@ export default {
       if (htracker.status !== 'stopped' && htracker.status !== '') {
         console.log('stop')
         getAgeAndGender()
+        this.$store.dispatch('getAgeAndGender', getAgeAndGender())
         htracker.stop()
         video.pause()
         sendingData = false
-        parseData()
         this.$store.dispatch('newRecord', parseData())
         .then((result) => {
           console.log(result)

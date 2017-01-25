@@ -2,12 +2,13 @@
   <div id="navbar">
     <el-row>
       <el-col :span="6" :offset="4"><router-link to="/"><img id="logo" src="../assets/v_logo_v.png"/></router-link></el-col>
-      <el-col class="menu" :span="8" style="">
+      <el-col class="menu" :span="10" style="">
         <el-menu class="el-menu-demo" mode="horizontal" style="float: right; margin-top: 25px; margin-left: 10px" :router="true">
           <el-menu-item index="/">Home</el-menu-item>
           <el-menu-item index="/About">About</el-menu-item>
           <el-menu-item index="/Desktop">Dashboard</el-menu-item>
           <el-menu-item index="/Detail">Health Overview</el-menu-item>
+          <el-menu-item index="/Login">Login</el-menu-item>
         </el-menu>
       </el-col>
     </el-row>

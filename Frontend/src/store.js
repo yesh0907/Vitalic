@@ -8,7 +8,7 @@ Vue.use(Vuex)
 // root state object.
 // each Vuex instance is just a single state tree.
 const state = {
-  'email': 'yesh0907@hotmail.com',
+  email: 'yesh0907@hotmail.com',
   records: {
   },
   screenWidth: 0,
