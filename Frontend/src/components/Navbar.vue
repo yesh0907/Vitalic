@@ -1,17 +1,16 @@
 <template>
   <div id="navbar">
-    <el-row>
-      <el-col :span="6" :offset="4"><router-link to="/"><img id="logo" src="../assets/v_logo_v.png"/></router-link></el-col>
-      <el-col class="menu" :span="10" style="">
-        <el-menu class="el-menu-demo" mode="horizontal" style="float: right; margin-top: 25px; margin-left: 10px" :router="true">
-          <el-menu-item index="/">Home</el-menu-item>
-          <el-menu-item index="/About">About</el-menu-item>
-          <el-menu-item index="/Desktop">Dashboard</el-menu-item>
-          <el-menu-item index="/Detail">Health Overview</el-menu-item>
-          <el-menu-item index="/Login">Login</el-menu-item>
-        </el-menu>
-      </el-col>
-    </el-row>
+    <div class="fixed-action-btn toolbar">
+  <a class="btn-floating btn-large red">
+    <i class="material-icons">reorder</i>
+  </a>
+  <ul>
+    <li class="waves-effect waves-light"><a href="/"><i class="material-icons">home</i></a></li>
+    <li class="waves-effect waves-light"><a href="/About"><i class="material-icons">info</i></a></li>
+    <li class="waves-effect waves-light"><a href="/Detail"><i class="material-icons">show_chart</i></a></li>
+    <li class="waves-effect waves-light"><a href="/Dashboard"><i class="material-icons">dashboard</i></a></li>
+  </ul>
+</div>
   </div>
 </template>
 
