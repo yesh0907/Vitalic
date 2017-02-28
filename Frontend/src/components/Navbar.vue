@@ -1,16 +1,16 @@
 <template>
   <div id="navbar">
     <div class="fixed-action-btn toolbar">
-  <a class="btn-floating btn-large red">
-    <i class="material-icons">reorder</i>
-  </a>
-  <ul>
-    <li class="waves-effect waves-light"><a href="/"><i class="material-icons">home</i></a></li>
-    <li class="waves-effect waves-light"><a href="/About"><i class="material-icons">info</i></a></li>
-    <li class="waves-effect waves-light"><a href="/Detail"><i class="material-icons">show_chart</i></a></li>
-    <li class="waves-effect waves-light"><a href="/Dashboard"><i class="material-icons">dashboard</i></a></li>
-  </ul>
-</div>
+      <a class="btn-floating btn-large red">
+        <i class="material-icons">reorder</i>
+      </a>
+    <ul>
+      <li class="waves-effect waves-light"><router-link to="/"><i class="material-icons">home</i></router-link></li>
+      <li class="waves-effect waves-light"><router-link to="/About"><i class="material-icons">info</i></router-link></li>
+      <li class="waves-effect waves-light"><router-link to="/Detail"><i class="material-icons">show_chart</i></router-link></li>
+      <li class="waves-effect waves-light"><router-link to="/Dashboard"><i class="material-icons">dashboard</i></router-link></li>
+    </ul>
+    </div>
   </div>
 </template>
 
