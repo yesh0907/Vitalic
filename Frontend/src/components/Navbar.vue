@@ -8,7 +8,7 @@
       <li class="waves-effect waves-light"><router-link to="/"><i class="material-icons">home</i></router-link></li>
       <li class="waves-effect waves-light"><router-link to="/About"><i class="material-icons">info</i></router-link></li>
       <li class="waves-effect waves-light"><router-link to="/Detail"><i class="material-icons">show_chart</i></router-link></li>
-      <li class="waves-effect waves-light"><router-link to="/Dashboard"><i class="material-icons">dashboard</i></router-link></li>
+      <li class="waves-effect waves-light"><router-link to="/Desktop"><i class="material-icons">dashboard</i></router-link></li>
     </ul>
     </div>
   </div>
