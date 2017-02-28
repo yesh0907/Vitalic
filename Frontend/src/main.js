@@ -31,8 +31,6 @@ Vue.use(VueRouter)
 Vue.use(Load)
 
 const router = new VueRouter({
-  mode: 'history',
-  base: __dirname,
   routes: [
     { path: '/Login', component: Login },
     { path: '/Dashboard', component: Dashboard },
